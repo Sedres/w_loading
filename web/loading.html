@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="CSS/style.css" />
+    <title>LoadingScreen</title>
+  </head>
+  <body>
+    <nav id="nav-container">
+      <div id="updates">
+        <img src="assets/icons/updates.svg" alt="updates" class="updicon" />
+        <section class="updates-container">
+          <p>Updates V 1.0</p>
+          <ul id="updates-container"></ul>
+        </section>
+      </div>
+      <section class="socials" id="socials"></section>
+    </nav>
+    <main>
+      <section id="boxLogo">
+        <img src="assets/logo.png" alt="logo" class="logo" />
+      </section>
+
+      <footer>
+        <section class="loader">
+          <label id="loading-text" for="loading-proggers"></label>
+          <progress value="0" max="100" id="loading-proggers"></progress>
+        </section>
+      </footer>
+      <img id="bg" src="" alt="background" />
+      <script src="JS/main.js"></script>
+      <script src="JS/config.js"></script>
+    </main>
+  </body>
+</html>
