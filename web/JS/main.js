@@ -38,8 +38,31 @@ const setComponents = () => {
   loadingText.textContent = Config.loadingText[randomText]
 
   // Background
-  const background = document.getElementById('bg')
-  background.src = Config.background
+  const backgroundContainer = document.getElementById('background-container')
+  switch (Config.background.useVideo) {
+    case true:
+      if (Config.background.mediaType === 'youtube') {
+        const video = document.createElement('iframe')
+        video.src = `https://youtube.com/embed/${Config.background.mediaUrl}?controls=0&autoplay=1&mute=1&loop=1`
+        video.classList.add('bg')
+        backgroundContainer.appendChild(video)
+      } else if (Config.background.mediaType === 'local') {
+        const video = document.createElement('video')
+        video.src = Config.background.mediaUrl
+        video.classList.add('bg')
+        video.autoplay = true
+        video.loop = true
+        video.muted = true
+        backgroundContainer.appendChild(video)
+      }
+      break
+    case false:
+      const img = document.createElement('img')
+      img.src = Config.background.mediaUrl
+      backgroundContainer.appendChild(img)
+      img.classList.add('bg')
+      break
+  }
 }
 
 const setProgress = (value) => {

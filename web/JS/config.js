@@ -1,6 +1,10 @@
 Config = {}
 
-Config.background = 'assets/bg.jpg'
+Config.background = {
+  useVideo: true,
+  mediaType: 'local', // For videos can be 'youtube' or 'local'
+  mediaUrl: 'assets/bg.mp4' //Path or Video ID from youtube exapmle id inside brakets ?v= [Ixv6kcHbpWE] &
+}
 
 Config.loadingText = [
   'Loading ...',
