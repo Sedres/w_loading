@@ -1,81 +1,94 @@
+// Constantes
+const updatesContainer = document.getElementById('updates-container')
+const loadingText = document.getElementById('loading-text')
+const progress = document.getElementById('loading-proggers')
+const backgroundContainer = document.getElementById('background-container')
+const logoBox = document.getElementById('boxLogo')
+const socialsContainer = document.getElementById('socials')
+
 // Listeners
-window.addEventListener('load', () => {
-  setComponents()
-})
+window.addEventListener('load', setComponents)
+window.addEventListener('message', handleProgressMessage)
 
-window.addEventListener('message', (event) => {
-  if (event.data.eventName === 'loadProgress') {
-    setProgress(parseInt(event.data.loadFraction * 100))
-  }
-})
+// Funciones
+function setComponents() {
+  setSocialIcons()
+  setUpdatesList()
+  setRandomLoadingText()
+  setBackground()
+}
 
-const setComponents = () => {
-  // Socials
-  const socialsContainer = document.getElementById('socials')
+function setSocialIcons() {
   Config.socials.forEach((social) => {
-    const a = document.createElement('a')
-    a.href = social.link
+    const link = document.createElement('a')
+    link.href = social.link
     const img = document.createElement('img')
     img.src = social.icon
     img.className = social.class
-    a.appendChild(img)
-    socialsContainer.appendChild(a)
+    link.appendChild(img)
+    socialsContainer.appendChild(link)
   })
+}
 
-  // Updates
-  const updatesContainer = document.getElementById('updates-container')
+function setUpdatesList() {
   const updatesFragment = document.createDocumentFragment()
   Config.updates.forEach((update) => {
-    const li = document.createElement('li')
-    li.textContent = update
-    updatesFragment.appendChild(li)
+    const listItem = document.createElement('li')
+    listItem.textContent = update
+    updatesFragment.appendChild(listItem)
   })
   updatesContainer.appendChild(updatesFragment)
+}
 
-  // TextLabel
-  const loadingText = document.getElementById('loading-text')
-  const randomText = Math.floor(Math.random() * Config.loadingText.length)
-  loadingText.textContent = Config.loadingText[randomText]
+function setRandomLoadingText() {
+  const randomIndex = Math.floor(Math.random() * Config.loadingText.length)
+  loadingText.textContent = Config.loadingText[randomIndex]
+}
 
-  // Background
-  const backgroundContainer = document.getElementById('background-container')
-  switch (Config.background.useVideo) {
-    case true:
-      if (Config.background.mediaType === 'youtube') {
-        const video = document.createElement('iframe')
-        video.src = `https://youtube.com/embed/${Config.background.mediaUrl}?controls=0&autoplay=1&mute=1&loop=1`
-        video.classList.add('bg')
-        backgroundContainer.appendChild(video)
-      } else if (Config.background.mediaType === 'local') {
-        const video = document.createElement('video')
-        video.src = Config.background.mediaUrl
-        video.classList.add('bg')
-        video.autoplay = true
-        video.loop = true
-        video.muted = true
-        backgroundContainer.appendChild(video)
-      }
-      break
-    case false:
-      const img = document.createElement('img')
-      img.src = Config.background.mediaUrl
-      backgroundContainer.appendChild(img)
-      img.classList.add('bg')
-      break
+function setBackground() {
+  const backgroundElement =
+    Config.background.useVideo && Config.background.mediaType === 'youtube'
+      ? createYoutubeVideoElement(Config.background.mediaUrl)
+      : Config.background.useVideo && Config.background.mediaType === 'local'
+      ? createLocalVideoElement(Config.background.mediaUrl)
+      : createImageElement(Config.background.mediaUrl)
+
+  backgroundContainer.appendChild(backgroundElement)
+}
+
+function createYoutubeVideoElement(videoId) {
+  const video = document.createElement('iframe')
+  video.src = `https://youtube.com/embed/${videoId}?controls=0&autoplay=1&mute=1&loop=1`
+  video.classList.add('bg')
+  return video
+}
+
+function createLocalVideoElement(videoUrl) {
+  const video = document.createElement('video')
+  video.src = videoUrl
+  video.classList.add('bg')
+  video.autoplay = true
+  video.loop = true
+  video.muted = true
+  return video
+}
+
+function createImageElement(imageUrl) {
+  const image = document.createElement('img')
+  image.src = imageUrl
+  image.classList.add('bg')
+  return image
+}
+
+function handleProgressMessage(event) {
+  if (event.data.eventName === 'loadProgress') {
+    setProgress(parseInt(event.data.loadFraction * 100))
   }
 }
 
-const setProgress = (value) => {
-  const progress = document.getElementById('loading-proggers')
+function setProgress(value) {
   progress.value = value
-
-  // Get the logo box by its ID
-  const logoBox = document.getElementById('boxLogo')
-
-  // Calculate the shadow intensity based on the progress
-  const shadowIntensity = (value / 100) * 0.9 // 0.9 is the maximum shadow intensity
-
-  // Apply the shadow animation class and adjust the shadow based on the progress
+  const shadowIntensity = (value / 100) * 0.9
   logoBox.style.boxShadow = `0 0 20px rgba(212, 0, 255, ${shadowIntensity})`
   BusyspinnerOff()
 }
