@@ -1,8 +1,8 @@
 Config = {
   background: {
-    useVideo: true,
+    useVideo: false,
     mediaType: 'local', // For videos can be 'youtube' or 'local'
-    mediaUrl: '' //Path or Video ID from youtube exapmle id inside brakets ?v= [Ixv6kcHbpWE] &
+    mediaUrl: 'assets/bg.jpg' //Path or Video ID from youtube exapmle id inside brakets ?v= [Ixv6kcHbpWE] &
   },
   loadingText: [
     'Loading ...',

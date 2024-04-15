@@ -4,10 +4,10 @@
   --text-color: #ffffff;
 
   /* Progress Bar */
-  --proggress-color: #ffffff;
-  --proggress-border-color: #ffffff;
-  --proggress-border-shadow: a #d400ffab;
-  --proggres-background-color: #000000;
+  --progress-color: #ffffff;
+  --progress-border-color: #ffffff;
+  --progress-border-shadow: #d400ffab;
+  --progress-background-color: #000000;
 
   /* Logo */
   --logo-shadow: #d400ffab;
@@ -25,13 +25,13 @@ body {
 
 .bg {
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
   object-fit: cover;
   filter: blur(2px) brightness(50%);
 }
@@ -45,7 +45,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  border: solid 2px var(--logo-border-shadow);
+  border: 2px solid var(--logo-border-shadow);
   border-radius: 50%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.459);
 }
@@ -75,11 +75,9 @@ body {
   animation: 0.5s;
   filter: drop-shadow(0 0 10px var(--logo-shadow));
 }
-
 .updicon:hover ~ .updates-container {
   visibility: visible;
 }
-
 .updates-container {
   background-color: #000000d7;
   border-radius: 10px;
@@ -90,7 +88,6 @@ body {
 .updates-container:hover {
   visibility: visible;
 }
-
 .updates-container p {
   text-align: center;
   font-size: 1.5rem;
@@ -109,21 +106,19 @@ body {
   max-width: 200px;
   max-height: 150px;
 }
-
 .updates-container ul::-webkit-scrollbar {
   display: none;
 }
-
 .updates-container img {
   width: 30px;
   height: 30px;
   position: absolute;
-
   top: -1em;
   left: -0.5em;
   overflow: visible;
   z-index: 100;
 }
+
 /* Socials */
 .socials {
   position: absolute;
@@ -137,7 +132,6 @@ body {
   width: 20px;
   height: 20px;
 }
-
 .socials-box {
   display: flex;
   justify-content: center;
@@ -160,13 +154,12 @@ progress {
   width: 200px;
   height: 10px;
 }
-
 progress::-webkit-progress-bar {
   background-color: black;
   border-radius: 10px;
 }
 progress::-webkit-progress-value {
-  background-color: var(--proggress-color);
+  background-color: var(--progress-color);
   border-radius: 10px;
 }
 
@@ -178,19 +171,4 @@ progress::-webkit-progress-value {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-}
-
-/* Shadow Animation */
-
-.shadow-animation {
-  animation: logoShadowAnimation 1s linear forwards;
-}
-
-@keyframes logoShadowAnimation {
-  from {
-    box-shadow: inset 0 0 0 rgba(212, 0, 255, 0);
-  }
-  to {
-    box-shadow: inset 0 0 20px rgba(212, 0, 255, 0.9);
-  }
 }
