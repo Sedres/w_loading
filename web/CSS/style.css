@@ -170,6 +170,7 @@ body {
   transform: translateY(-50%);
   opacity: 0;
   transition: opacity 0.5s;
+  font-family: 'Division One', sans-serif;
 }
 
 .open-socials {
