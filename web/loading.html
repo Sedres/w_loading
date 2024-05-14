@@ -1,41 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="CSS/style.css" />
+    <!-- Dependencies here -->
+    <link
+      rel="stylesheet"
+      href="https://kit-pro.fontawesome.com/releases/v6.5.2/css/pro.min.css"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Scripts here -->
+    <script src="./config.js"></script>
+    <script src="JS/main.js"></script>
 
-    <title>LoadingScreen</title>
+    <title>Fivem Loading</title>
   </head>
   <body>
-    <div id="background-container"></div>
-    <nav id="nav-container">
-      <div id="updates">
-        <img src="assets/icons/updates.svg" alt="updates" class="updicon" />
-        <section class="updates-container">
-          <p>Updates V 1.0</p>
-          <ul id="updates-container"></ul>
-        </section>
-      </div>
-      <section class="socials" id="socials"></section>
-    </nav>
+    <img alt="background" id="background" />
     <main>
-      <section id="boxLogo">
-        <img src="assets/logo.png" alt="logo" class="logo" />
+      <img alt="logo" id="logo" />
+      <section class="socials-container">
+        <button id="social-toggle">
+          <i></i>
+        </button>
+        <div id="socials"></div>
       </section>
 
-      <footer>
-        <section class="loader">
-          <label id="loading-text" for="loading-proggers"></label>
-          <progress value="0" max="100" id="loading-proggers"></progress>
-        </section>
-      </footer>
-      <script src="JS/main.js"></script>
-      <script src="JS/config.js"></script>
-      <script src="https://www.youtube.com/iframe_api"></script>
+      <button id="fullscreen">
+        <i class="fa-solid fa-expand"></i>
+      </button>
     </main>
   </body>
 </html>

@@ -1,174 +1,197 @@
-:root {
-  /* Body */
-  --background-color: #0000008e;
-  --text-color: #ffffff;
-
-  /* Progress Bar */
-  --progress-color: #ffffff;
-  --progress-border-color: #ffffff;
-  --progress-border-shadow: #d400ffab;
-  --progress-background-color: #000000;
-
-  /* Logo */
-  --logo-shadow: #d400ffab;
-  --logo-border-shadow: #ffffff;
-}
+@import url('https://fonts.cdnfonts.com/css/division-one');
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  padding: 0;
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
   overflow: hidden;
+  user-select: none;
+  font-family: 'Division One', sans-serif;
 }
 
-.bg {
-  position: absolute;
+#background {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  object-fit: cover;
-  filter: blur(2px) brightness(50%);
+  filter: brightness(0.3);
+  transition: filter 0.5s;
+  z-index: -1;
+  pointer-events: none;
 }
 
-.logo {
-  width: 96px;
-  height: 96px;
-}
-
-#boxLogo {
+#logo {
+  pointer-events: none;
   position: absolute;
   top: 50%;
   left: 50%;
-  border: 2px solid var(--logo-border-shadow);
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.459);
+  border: 1px solid white;
+  background-color: black;
+  box-shadow: 0 0 20px white;
 }
 
-/* Updates */
-#updates {
-  visibility: collapse;
-  flex-direction: column;
-  align-items: left;
+.socials-container {
   position: absolute;
-  bottom: 20%;
-  left: 1%;
-  width: fit-content;
-  height: fit-content;
-  background-color: #000000b0;
-  border-radius: 10px;
-}
-.updicon {
-  visibility: visible;
-  width: 32px;
-  height: 32px;
-  margin-bottom: -2.5em;
-  z-index: 1;
-}
-.updicon:hover {
-  scale: 1.1;
-  animation: 0.5s;
-  filter: drop-shadow(0 0 10px var(--logo-shadow));
-}
-.updicon:hover ~ .updates-container {
-  visibility: visible;
-}
-.updates-container {
-  background-color: #000000d7;
-  border-radius: 10px;
-  padding: 0.5em;
-  visibility: hidden;
-  overflow: hidden;
-}
-.updates-container:hover {
-  visibility: visible;
-}
-.updates-container p {
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0.3em;
-}
-.updates-container ul {
-  max-height: 250px;
-  max-width: 70%;
-  padding: 1em 3em 1em 2.5em;
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.459);
-  border-radius: 10px;
-  overflow: scroll;
-  width: fit-content;
-  height: fit-content;
-  max-width: 200px;
-  max-height: 150px;
-}
-.updates-container ul::-webkit-scrollbar {
-  display: none;
-}
-.updates-container img {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: -1em;
-  left: -0.5em;
-  overflow: visible;
-  z-index: 100;
-}
-
-/* Socials */
-.socials {
-  position: absolute;
-  bottom: 3%;
-  left: 1%;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
   display: flex;
-  flex-direction: row;
-  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.socials img {
-  width: 20px;
-  height: 20px;
+#socials {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
-.socials-box {
+
+#socials a {
+  text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.582);
-  border-radius: 10px;
-  padding: 0.5rem;
-  cursor: pointer;
-  transition: 0.5s;
-}
-.socials-box:hover {
-  scale: 1.1;
-  transition: 0.5s;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.459);
-}
+  color: white;
+  font-size: 25px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 10px;
 
-/* Progress Bar */
-progress {
-  appearance: none;
-  width: 200px;
-  height: 10px;
-}
-progress::-webkit-progress-bar {
   background-color: black;
-  border-radius: 10px;
-}
-progress::-webkit-progress-value {
-  background-color: var(--progress-color);
-  border-radius: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
 }
 
-.loader {
+#socials a:hover {
+  background-color: white;
+  color: black;
+  scale: 1.1;
+}
+
+#social-toggle {
   position: absolute;
-  bottom: 3%;
-  right: 4%;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 80px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  background-color: black;
+  border-radius: 8px;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: all 0.5s;
+  z-index: 1;
+}
+
+#social-toggle i {
+  font-size: 15px;
+}
+
+#social-toggle:hover {
+  background-color: white;
+  color: black;
+  width: 35px;
+}
+.socialtooltip {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  border: 1px solid white;
+  background-color: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-right: 10px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+:has(> tool-tip) {
+  position: relative;
+}
+:has(> tool-tip):hover tool-tip {
+  opacity: 1;
+}
+
+/* FUll screen button */
+
+#fullscreen {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background-color: black;
+  border-radius: 8px;
+  border: 1px solid white;
+  transition: all 0.5s;
+  z-index: 1;
+}
+
+#fullscreen:hover {
+  background-color: white;
+  color: black;
+}
+.fullscreentooltip {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  border: 1px solid white;
+  background-color: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-left: 10px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.open-socials {
+  animation: in-right 0.5s;
+}
+.close-socials {
+  animation: out-right 0.5s;
+}
+@keyframes in-right {
+  0% {
+    transform: translateX(100%) translateY(-50%);
+  }
+  100% {
+    transform: translateX(0) translateY(-50%);
+  }
+}
+
+@keyframes out-right {
+  0% {
+    transform: translateX(0) translateY(-50%);
+  }
+  100% {
+    transform: translateX(100%) translateY(-50%);
+  }
 }

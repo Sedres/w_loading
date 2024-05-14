@@ -1,94 +1,93 @@
-// Constantes
-const updatesContainer = document.getElementById('updates-container')
-const loadingText = document.getElementById('loading-text')
-const progress = document.getElementById('loading-proggers')
-const backgroundContainer = document.getElementById('background-container')
-const logoBox = document.getElementById('boxLogo')
-const socialsContainer = document.getElementById('socials')
+$(function () {
+  // Background
+  let index = 0
+  const background = $('#background')
 
-// Listeners
-window.addEventListener('load', setComponents)
-window.addEventListener('message', handleProgressMessage)
-
-// Funciones
-function setComponents() {
-  setSocialIcons()
-  setUpdatesList()
-  setRandomLoadingText()
-  setBackground()
-}
-
-function setSocialIcons() {
-  Config.socials.forEach((social) => {
-    const link = document.createElement('a')
-    link.href = social.link
-    const img = document.createElement('img')
-    img.src = social.icon
-    img.className = social.class
-    link.appendChild(img)
-    socialsContainer.appendChild(link)
-  })
-}
-
-function setUpdatesList() {
-  const updatesFragment = document.createDocumentFragment()
-  Config.updates.forEach((update) => {
-    const listItem = document.createElement('li')
-    listItem.textContent = update
-    updatesFragment.appendChild(listItem)
-  })
-  updatesContainer.appendChild(updatesFragment)
-}
-
-function setRandomLoadingText() {
-  const randomIndex = Math.floor(Math.random() * Config.loadingText.length)
-  loadingText.textContent = Config.loadingText[randomIndex]
-}
-
-function setBackground() {
-  const backgroundElement =
-    Config.background.useVideo && Config.background.mediaType === 'youtube'
-      ? createYoutubeVideoElement(Config.background.mediaUrl)
-      : Config.background.useVideo && Config.background.mediaType === 'local'
-      ? createLocalVideoElement(Config.background.mediaUrl)
-      : createImageElement(Config.background.mediaUrl)
-
-  backgroundContainer.appendChild(backgroundElement)
-}
-
-function createYoutubeVideoElement(videoId) {
-  const video = document.createElement('iframe')
-  video.src = `https://youtube.com/embed/${videoId}?controls=0&autoplay=1&mute=1&loop=1`
-  video.classList.add('bg')
-  return video
-}
-
-function createLocalVideoElement(videoUrl) {
-  const video = document.createElement('video')
-  video.src = videoUrl
-  video.classList.add('bg')
-  video.autoplay = true
-  video.loop = true
-  video.muted = true
-  return video
-}
-
-function createImageElement(imageUrl) {
-  const image = document.createElement('img')
-  image.src = imageUrl
-  image.classList.add('bg')
-  return image
-}
-
-function handleProgressMessage(event) {
-  if (event.data.eventName === 'loadProgress') {
-    setProgress(parseInt(event.data.loadFraction * 100))
+  // Funciones
+  function setBackground(src) {
+    background.fadeOut(Config.colageTimes.imageHide * 1000, function () {
+      background.attr('src', src).fadeIn(Config.colageTimes.imageReveal * 1000)
+    })
   }
-}
 
-function setProgress(value) {
-  progress.value = value
-  const shadowIntensity = (value / 100) * 0.9
-  logoBox.style.boxShadow = `0 0 20px rgba(212, 0, 255, ${shadowIntensity})`
-  BusyspinnerOff()
-}
+  function setBackgroundColage() {
+    index = (index + 1) % Config.backgrounds.length
+    setBackground(Config.backgrounds[index])
+  }
+
+  function setRandomBackground() {
+    let newIndex
+    do {
+      newIndex = Math.floor(Math.random() * Config.backgrounds.length)
+    } while (newIndex === index)
+    index = newIndex
+    setBackground(Config.backgrounds[index])
+  }
+
+  // Intervalo
+  if (Config.backgroundColage.enabled) {
+    const intervalFunction = Config.backgroundColage.random
+      ? setRandomBackground
+      : setBackgroundColage
+    setInterval(intervalFunction, Config.colageTimes.interval * 1000)
+  }
+  $('#background').attr('src', Config.background)
+
+  // Fullscreen
+  const socialscontainer = $('.socials-container')
+  const logo = $('#logo')
+  const fullscreenicon = $('#fullscreen > i')
+  $('#fullscreen').append(
+    '<tool-tip role="tooltip" class="fullscreentooltip">Fullscreen</tool-tip>'
+  )
+  $('#fullscreen').click(function () {
+    if (background.css('filter') === 'brightness(1)') {
+      background.css('filter', 'brightness(0.3)')
+      socialscontainer.fadeIn()
+      fullscreenicon.attr('class', 'fa-solid fa-expand')
+      logo.fadeIn()
+    } else {
+      socialscontainer.fadeOut()
+      logo.fadeOut()
+      background.css('filter', 'brightness(1)')
+      fullscreenicon.attr('class', 'fa-solid fa-compress')
+    }
+  })
+
+  // Logo
+  $('#logo').attr('src', Config.logo.URL)
+
+  // Socials
+  const socialsContainer = $('#socials')
+  const socialToggle = $('#social-toggle')
+  const socialToggleIcon = socialToggle.children('i')
+
+  Object.entries(Config.socials).forEach(([key, social]) => {
+    const { icon, URL } = social
+    const socialHTML = `<a onclick="window.invokeNative('openUrl', '${URL}')">
+        <tool-tip role="tooltip" class="socialtooltip">${key}</tool-tip>
+        <i class="${icon}"></i>
+      </a>`
+    socialsContainer.append(socialHTML).hide()
+  })
+
+  socialToggleIcon
+    .attr('class', 'fa-solid fa-arrow-left-from-arc')
+    .css('rotate', '0deg')
+
+  socialToggle.on('click', function () {
+    if (socialsContainer.hasClass('open-socials')) {
+      socialsContainer
+        .removeClass('open-socials')
+        .addClass('close-socials')
+        .fadeOut()
+      socialToggleIcon.css('transform', 'rotate(0)')
+    } else {
+      socialsContainer
+        .addClass('open-socials')
+        .removeClass('close-socials')
+        .fadeIn()
+      socialToggleIcon.css('transform', 'rotate(180deg)')
+    }
+  })
+})

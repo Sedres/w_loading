@@ -1,16 +1,18 @@
 fx_version 'cerulean'
 game 'gta5'
 
-name "sd_loading"
-description "Fivem Basic Loading Screen"
+name "w_loading"
+description "Fivem Loading Screen"
 author "sedres"
-version "1.0"
+version "2.0"
+
+
 
 loadscreen 'web/loading.html'
 loadscreen_cursor 'yes'
 
 files { 'web/loading.html',
-	'web/JS/*', 'web/CSS/*', 'web/assets/*', 'web/assets/**/*' }
+	'web/JS/*', 'web/CSS/*', 'web/assets/*', 'web/config.js' }
 
 client_scripts {
 	'client/main.lua',
