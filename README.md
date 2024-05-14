@@ -9,6 +9,16 @@ FullScreen option for see background clearly.
 
 > [!IMPORTANT]
 > Yes im working on adding feautures
+
+> [!Todo]
+> Add video option for background.
+
+>Add music option.
+
+>Add changelog sections.
+
+>Add music and video controls.
+
 ## Authors
 
 - [@Sedres](https://github.com/Sedres)
@@ -20,6 +30,5 @@ Drag and drop the resource in your resources folder and then just ensure the scr
 ## Screenshots
 
 ![Previews](https://imgur.com/0FduGEF.png)
-![Previews](https://imgur.com/iPs93iO.png)
-)
 
+![Previews](https://imgur.com/iPs93iO.png)
