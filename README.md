@@ -19,7 +19,7 @@ FullScreen option for see background clearly.
 Drag and drop the resource in your resources folder and then just ensure the script in the server.cfg
 ## Screenshots
 
-![App Screenshot](![image](https://github.com/Sedres/sd_loading/assets/104393203/0f8ebceb-0df1-431c-a7f6-6d7c2e43af22))
-![Previews](![image](https://github.com/Sedres/sd_loading/assets/104393203/7b77fa5d-4d92-4318-a36f-0d8d26117ce9)
+![Previews](https://imgur.com/0FduGEF.png)
+![Previews](https://imgur.com/iPs93iO.png)
 )
 
