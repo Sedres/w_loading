@@ -10,7 +10,7 @@ FullScreen option for see background clearly.
 > [!IMPORTANT]
 > Yes im working on adding feautures
 
-> [!Todo]
+> [!Tip]
 > Add video option for background.
 
 >Add music option.
