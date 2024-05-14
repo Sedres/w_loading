@@ -11,13 +11,7 @@ FullScreen option for see background clearly.
 > Yes im working on adding feautures
 
 > [!Tip]
-> Add video option for background.
-
->Add music option.
-
->Add changelog sections.
-
->Add music and video controls.
+> Todo:\nAdd video option for background.\nAdd music option.\nAdd changelog sections.\nAdd music and video controls.
 
 ## Authors
 
