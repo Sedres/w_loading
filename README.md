@@ -12,10 +12,11 @@ FullScreen option for see background clearly.
 
 > [!Tip]
 > Todo:
-> Add video option for background.
-> Add music option.
-> Add changelog sections.
-> Add music and video controls.
+> [x]Add changelog sections.
+> [x]Add welcome message
+> []Add video option for background.
+> []Add music option.
+> []Add music and video controls.
 
 ## Authors
 
@@ -27,6 +28,6 @@ FullScreen option for see background clearly.
 Drag and drop the resource in your resources folder and then just ensure the script in the server.cfg
 ## Screenshots
 
-![Previews](https://imgur.com/0FduGEF.png)
+![Loadingpage1](https://github.com/Sedres/w_loading/assets/104393203/a30dc0fb-0d17-4591-a232-26183456f01a)
 
-![Previews](https://imgur.com/iPs93iO.png)
+![Loadingpage2](https://github.com/Sedres/w_loading/assets/104393203/b660e20d-da1c-46d8-8db9-d7da4b8c857c)
