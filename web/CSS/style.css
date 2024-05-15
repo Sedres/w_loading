@@ -34,6 +34,24 @@ body {
   box-shadow: 0 0 20px white;
 }
 
+/* Welcome */
+#welcome {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  gap: 10px;
+}
+#welcome i {
+  font-size: 30px;
+}
+
+/* Socials */
 .socials-container {
   position: absolute;
   top: 50%;
@@ -133,6 +151,114 @@ body {
   opacity: 1;
 }
 
+/* Info */
+
+.info-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#infoText {
+  position: absolute;
+  left: 50%;
+  text-align: center;
+  transform: translateX(-50%);
+  color: white;
+  width: 500px;
+  height: 300px;
+  background-color: black;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid white;
+  overflow: auto;
+  overflow-wrap: break-word; /* Para el ajuste automático de palabras */
+  word-wrap: break-word; /* Para compatibilidad con navegadores más antiguos */
+}
+
+#infoText h3 {
+  position: sticky;
+  top: -10px;
+  font-size: 1.5rem;
+  background-color: black;
+  padding: 10px;
+
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 4px;
+  background: transparent;
+}
+::-webkit-scrollbar-track {
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+#info {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+#info a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 25px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: black;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+#info a:hover {
+  background-color: white;
+  color: black;
+  scale: 1.1;
+}
+
+.infotooltip {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  border: 1px solid white;
+  background-color: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-left: 10px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
 /* FUll screen button */
 
 #fullscreen {
@@ -152,6 +278,7 @@ body {
 #fullscreen:hover {
   background-color: white;
   color: black;
+  scale: 1.1;
 }
 .fullscreentooltip {
   position: absolute;

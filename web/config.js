@@ -1,7 +1,9 @@
+var username = window.nuiHandoverData.name
+
 const Config = {
   // ##################Background Section##################
   backgroundColage: {
-    enabled: true,
+    enabled: false,
     random: false
   },
   colageTimes: {
@@ -35,5 +37,46 @@ const Config = {
       icon: 'fab fa-twitter',
       URL: 'https://twitter.com/WolfGamingGG'
     }
+  },
+  // ######################Info Section######################
+  info: {
+    changelog: {
+      title: 'Server Changelog v2.0',
+      description: `
+        Changelog v2.0<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br>
+        - Added more feautures<br> 
+      `,
+      icon: 'fa-sharp fa-solid fa-scroll'
+    },
+    infoPage: {
+      title: 'Version',
+      description: `
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      `,
+      icon: 'fa-solid fa-memo-circle-info'
+    }
+  },
+
+  // ######################Welcome Section######################
+  welcome: {
+    text: `Welcome ${username} to your server name`,
+    icon: 'fa-solid fa-circle-notch fa-spin'
   }
 }
