@@ -11,12 +11,12 @@ FullScreen option for see background clearly.
 > Yes im working on adding feautures
 
 
-> Todo:
-> [x]Add changelog sections.
-> [x]Add welcome message
-> []Add video option for background.
-> []Add music option.
-> []Add music and video controls.
+> Todo:<br />
+> [x]Add changelog sections.<br />
+> [x]Add welcome message<br />
+> []Add video option for background.<br />
+> []Add music option.<br />
+> []Add music and video controls.<br />
 
 ## Authors
 
