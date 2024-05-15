@@ -10,7 +10,7 @@ FullScreen option for see background clearly.
 > [!IMPORTANT]
 > Yes im working on adding feautures
 
-> [!Tip]
+
 > Todo:
 > [x]Add changelog sections.
 > [x]Add welcome message
