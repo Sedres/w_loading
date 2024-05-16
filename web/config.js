@@ -1,5 +1,4 @@
 const username = window.nuiHandoverData.name
-
 const Config = {
   // ##################Background Section##################
   backgroundColage: {
@@ -76,7 +75,7 @@ const Config = {
 
   // ######################Welcome Section######################
   welcome: {
-    text: `Welcome ${username} to your server name`,
+    text: `Welcome ${username} to your server name` /*  */,
     icon: 'fa-solid fa-circle-notch fa-spin'
   }
 }

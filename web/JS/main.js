@@ -8,18 +8,22 @@ $(function () {
     '<tool-tip role="tooltip" class="fullscreentooltip">Fullscreen</tool-tip>'
   )
   $('#fullscreen').click(function () {
+    const background = $('#background')
+    const welcome = $('#welcome')
     if (background.css('filter') === 'brightness(1)') {
       background.css('filter', 'brightness(0.3)')
       socialscontainer.fadeIn()
       infoContainer.fadeIn()
       fullscreenicon.attr('class', 'fa-solid fa-expand')
       logo.fadeIn()
+      welcome.fadeIn()
     } else {
       socialscontainer.fadeOut()
       infoContainer.fadeOut()
       logo.fadeOut()
       background.css('filter', 'brightness(1)')
       fullscreenicon.attr('class', 'fa-solid fa-compress')
+      welcome.fadeOut()
     }
   })
 
