@@ -4,8 +4,8 @@ const Config = {
   backgroundVideo: true,
   backgroundVideoOnline: true,
   backgroundVideoLoop: true,
-  backgroundVideoMuted: true,
-  videoURL: 'https://www.youtube.com/watch?v=DAQYMyzE8ww',
+  backgroundVideoMuted: false,
+  videoURL: 'https://www.youtube.com/watch?v=hr4IHxQGux4',
   // ##################Background Image Section##################
   backgroundColage: {
     enabled: false,
