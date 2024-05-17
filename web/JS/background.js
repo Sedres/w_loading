@@ -21,7 +21,7 @@ $(function () {
           Config.backgroundVideoLoop
             ? 'loop=1&playlist=' + youtubeEmbedURL.split('/').pop()
             : ''
-        }&rel=0&autoplay=1&controls=0&showinfo=0&modestbranding=1&fs=0&disablekb=1`
+        }&autoplay=1&controls=0&rel=0&modestbranding=1`
 
         backgroundVideo = /* html */ `<iframe class="background" src="${youtubeEmbedURL}${youtubeParams}" frameborder="0"  allow="autoplay; encrypted-media" allowfullscreen></iframe>`
       } else {
