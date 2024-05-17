@@ -1,4 +1,4 @@
-// const username = window.nuiHandoverData.name
+const username = window.nuiHandoverData.name
 const Config = {
   // ##################Background video Section##################
   backgroundVideo: true,
@@ -81,7 +81,7 @@ const Config = {
 
   // ######################Welcome Section######################
   welcome: {
-    text: `Welcome  to your server name`,
+    text: `Welcome ${username} to your server name`,
     icon: 'fa-solid fa-circle-notch fa-spin'
   }
 }
