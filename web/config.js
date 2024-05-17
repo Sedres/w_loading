@@ -1,6 +1,12 @@
-const username = window.nuiHandoverData.name
+// const username = window.nuiHandoverData.name
 const Config = {
-  // ##################Background Section##################
+  // ##################Background video Section##################
+  backgroundVideo: true,
+  backgroundVideoOnline: true,
+  backgroundVideoLoop: true,
+  backgroundVideoMuted: true,
+  videoURL: 'https://www.youtube.com/watch?v=DAQYMyzE8ww',
+  // ##################Background Image Section##################
   backgroundColage: {
     enabled: false,
     random: false
@@ -75,7 +81,7 @@ const Config = {
 
   // ######################Welcome Section######################
   welcome: {
-    text: `Welcome ${username} to your server name` /*  */,
+    text: `Welcome  to your server name` /*  ${username}*/,
     icon: 'fa-solid fa-circle-notch fa-spin'
   }
 }

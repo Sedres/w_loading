@@ -8,10 +8,10 @@ $(function () {
     '<tool-tip role="tooltip" class="fullscreentooltip">Fullscreen</tool-tip>'
   )
   $('#fullscreen').click(function () {
-    const background = $('#background')
+    const background = $('.background')
     const welcome = $('#welcome')
     if (background.css('filter') === 'brightness(1)') {
-      background.css('filter', 'brightness(0.3)')
+      background.css('filter', 'brightness(0.5)')
       socialscontainer.fadeIn()
       infoContainer.fadeIn()
       fullscreenicon.attr('class', 'fa-solid fa-expand')
