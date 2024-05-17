@@ -15,7 +15,7 @@ FullScreen option for see background clearly.
 > [x]Add changelog sections.<br />
 > [x]Add welcome message<br />
 > [x]Add fullscreen button <br />
-> []Add video option for background.<br />
+> [x]Add video option for background.<br />
 > []Add music option.<br />
 > []Add music and video controls.<br />
 
