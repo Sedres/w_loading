@@ -4,6 +4,8 @@ $(function () {
   const infoContainer = $('.info-container')
   const logo = $('#logo')
   const fullscreenicon = $('#fullscreen > i')
+  const musicContainer = $('#music-container')
+  const openMusic = $('#open-music')
   $('#fullscreen').append(
     '<tool-tip role="tooltip" class="fullscreentooltip">Fullscreen</tool-tip>'
   )
@@ -17,6 +19,7 @@ $(function () {
       fullscreenicon.attr('class', 'fa-solid fa-expand')
       logo.fadeIn()
       welcome.fadeIn()
+      openMusic.fadeIn()
     } else {
       socialscontainer.fadeOut()
       infoContainer.fadeOut()
@@ -24,6 +27,8 @@ $(function () {
       background.css('filter', 'brightness(1)')
       fullscreenicon.attr('class', 'fa-solid fa-compress')
       welcome.fadeOut()
+      openMusic.fadeOut()
+      musicContainer.fadeOut()
     }
   })
 

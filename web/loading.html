@@ -20,6 +20,7 @@
     <script src="JS/main.js"></script>
     <script src="JS/info.js"></script>
     <script src="JS/socials.js"></script>
+    <script src="JS/music.js"></script>
 
     <title>Fivem Loading</title>
   </head>
@@ -38,6 +39,37 @@
         <div id="info"></div>
       </section>
       <section id="infoText"></section>
+
+      <button id="open-music">
+        <tool-tip role="tooltip" class="musictooltip">Music</tool-tip
+        ><i class="fa-solid fa-music"></i>
+      </button>
+      <section id="music-container">
+        <div id="portrait-container">
+          <img id="music-portrait" alt="music-portrait" />
+          <div id="timestamp"></div>
+        </div>
+
+        <audio id="music-audio" autoplay>
+          Your browser does not support the audio element.
+        </audio>
+        <div id="music-buttons">
+          <button id="previous-track">
+            <i class="fa-solid fa-backward-step"></i>
+          </button>
+          <button id="pause-play"><i class="fa-solid fa-pause"></i></button>
+          <button id="next-track">
+            <i class="fa-solid fa-forward-step"></i>
+          </button>
+          <button id="mute-unmute">
+            <i class="fa-solid fa-volume-high"></i>
+          </button>
+          <div id="sound-cointainer">
+            <input type="range" id="volume" min="0" max="100" value="10" />
+          </div>
+          <span id="song-name"></span>
+        </div>
+      </section>
 
       <section id="welcome"></section>
 

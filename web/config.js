@@ -41,6 +41,14 @@ const Config = {
     Twitter: {
       icon: 'fab fa-twitter',
       URL: 'https://twitter.com/WolfGamingGG'
+    },
+    Youtube: {
+      icon: 'fab fa-youtube',
+      URL: 'https://www.youtube.com/@WolfGamingGG'
+    },
+    Web: {
+      icon: 'fas fa-globe',
+      URL: 'https://wolf.gg/'
     }
   },
   // ######################Info Section######################
@@ -83,5 +91,23 @@ const Config = {
   welcome: {
     text: `Welcome ${username} to your server name`,
     icon: 'fa-solid fa-circle-notch fa-spin'
+  },
+
+  // ######################Music Section######################
+  music: {
+    songVolume: 10,
+    songs: [
+      {
+        Title: 'Emin Nilsen - BANE Brazilian',
+        portrait: 'https://ncs.io/static/web/img/logo-og.png?_m=1597301782',
+        url: 'assets/music/ncs.mp3'
+      },
+      {
+        Title: 'Soundy x Sander Mölder - Donna',
+        portrait:
+          'https://static.vecteezy.com/system/resources/previews/027/426/085/non_2x/ncs-logo-design-inspiration-for-a-unique-identity-modern-elegance-and-creative-design-watermark-your-success-with-the-striking-this-logo-vector.jpg',
+        url: 'assets/music/ncs2.mp3'
+      }
+    ]
   }
 }
