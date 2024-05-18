@@ -23,6 +23,10 @@ FullScreen option for see background clearly.
 
 - [@Sedres](https://github.com/Sedres)
 
+## Mentions
+[NCS](https://www.youtube.com/@NoCopyrightSounds) thanks for the music.
+[Warraa_](https://www.youtube.com/watch?v=ECCWwo6CsUg) thanks for the video background.
+
 
 ## Installation
 
