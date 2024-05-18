@@ -15,9 +15,9 @@ FullScreen option for see background clearly.
 > [x]Add changelog sections.<br />
 > [x]Add welcome message<br />
 > [x]Add fullscreen button <br />
-> []Add video option for background.<br />
-> []Add music option.<br />
-> []Add music and video controls.<br />
+> [x]Add video option for background.<br />
+> [X]Add music option.<br />
+> [X]Add music and video controls.<br />
 
 ## Authors
 
@@ -27,7 +27,8 @@ FullScreen option for see background clearly.
 ## Installation
 
 Drag and drop the resource in your resources folder and then just ensure the script in the server.cfg
-## Screenshots
+## Previews
+- [Video Preview](https://youtu.be/KAjBK2MEf5k)
 
 ![Loadingpage1](https://github.com/Sedres/w_loading/assets/104393203/a30dc0fb-0d17-4591-a232-26183456f01a)
 
