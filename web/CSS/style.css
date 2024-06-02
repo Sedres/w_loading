@@ -113,6 +113,7 @@ body {
   background-color: black;
   border-radius: 8px;
   border: 1px solid white;
+  color: white;
   cursor: pointer;
   transition: all 0.5s;
   z-index: 1;
@@ -271,6 +272,7 @@ body {
   height: 40px;
   cursor: pointer;
   background-color: black;
+  color: white;
   border-radius: 8px;
   border: 1px solid white;
   transition: all 0.5s;
@@ -408,6 +410,7 @@ body {
   background-color: black;
   border-radius: 8px;
   border: 1px solid white;
+  color: white;
   transition: scale 0.5s, background-color 0.5s, color 0.5s;
 }
 #open-music i {

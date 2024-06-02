@@ -15,4 +15,4 @@ files { 'web/loading.html',
 
 
 server_script 'server/main.lua'
--- loadscreen_manual_shutdown 'yes' -- Uncomment to enable manual shutdown
+loadscreen_manual_shutdown 'yes' -- Comment to disable manual shutdown

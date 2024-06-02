@@ -1,14 +1,14 @@
 const username = window.nuiHandoverData.name
 const Config = {
   // ##################Background video Section##################
-  backgroundVideo: true,
+  backgroundVideo: false,
   backgroundVideoOnline: true,
   backgroundVideoLoop: true,
   backgroundVideoMuted: true,
   videoURL: 'https://www.youtube.com/watch?v=ECCWwo6CsUg',
   // ##################Background Image Section##################
   backgroundColage: {
-    enabled: false,
+    enabled: true,
     random: false
   },
   colageTimes: {
