@@ -20,11 +20,11 @@ $(function () {
     const button = $(`#${key}`)
     button.on('click', function () {
       if ($('#infoText').is(':visible')) {
-        $('#infoText').hide(300)
-        $('#infoText').empty()
+        $('#infoText').slideUp(300, function () {
+          $('#infoText').empty().append(textHtml).slideDown(300)
+        })
       } else {
-        $('#infoText').append(textHtml)
-        $('#infoText').show(300)
+        $('#infoText').empty().append(textHtml).slideDown(300)
       }
     })
   })
