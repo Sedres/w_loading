@@ -2,6 +2,7 @@ $(function () {
   // Info
 
   $('#infoText').hide()
+  let currentButton = null // Variable para rastrear el botón actualmente activo
 
   Object.entries(Config.info).forEach(([key, info]) => {
     const { title, description, icon } = info
@@ -19,12 +20,23 @@ $(function () {
 
     const button = $(`#${key}`)
     button.on('click', function () {
-      if ($('#infoText').is(':visible')) {
+      if (currentButton === key) {
+        // Si el mismo botón se vuelve a pulsar y está visible, cerrar el contenedor
         $('#infoText').slideUp(300, function () {
-          $('#infoText').empty().append(textHtml).slideDown(300)
+          $('#infoText').empty()
+          currentButton = null // Resetear el botón activo
         })
       } else {
-        $('#infoText').empty().append(textHtml).slideDown(300)
+        // Si otro botón se pulsa o no hay contenido visible
+        if ($('#infoText').is(':visible')) {
+          $('#infoText').slideUp(300, function () {
+            $('#infoText').empty().append(textHtml).slideDown(300)
+            currentButton = key // Actualizar el botón activo
+          })
+        } else {
+          $('#infoText').empty().append(textHtml).slideDown(300)
+          currentButton = key // Actualizar el botón activo
+        }
       }
     })
   })
