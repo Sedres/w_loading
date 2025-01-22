@@ -52,19 +52,19 @@ A sleek and fully customizable loading screen for your FiveM server! Designed wi
 
 ### 💎 **Main Loading Screen**
 
-![Main Loading Section]()
+![Main Loading Section](https://github.com/user-attachments/assets/f24e75a9-a491-4ef9-bc8c-370c756d5506)
 
 ### 📰 **News Section**
 
-![News Section](./screenshots/news_section_1.png)
+![News Section](https://github.com/user-attachments/assets/f30bc3af-f92e-4f9b-9a40-bac0e63468d8)
 
 ### 👥 **Team Section**
 
-![Team Section](./screenshots/team_section_2.png)
+![Team Section](https://github.com/user-attachments/assets/5b22747d-7d92-43ee-a79c-14d2b65c9453)
 
 ### 📜 **Changelog Section**
 
-![Changelog Section](./screenshots/changelog_section_3.png)
+![Changelog Section](https://github.com/user-attachments/assets/9e7fd3a0-76f3-437d-8351-826a78d20998)
 
 ---
 
