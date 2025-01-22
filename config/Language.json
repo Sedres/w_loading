@@ -1,0 +1,17 @@
+{
+  "EN": {
+    "LoadingDefault": "Loading...",
+    "LoadingMap": "Loading Map...",
+    "LoadingSession": "Loading Session..."
+  },
+  "ES": {
+    "LoadingDefault": "Cargando...",
+    "LoadingMap": "Cargando Mapa...",
+    "LoadingSession": "Cargando Sesión.."
+  },
+  "FR": {
+    "LoadingDefault": "Chargement...",
+    "LoadingMap": "Chargement de la carte...",
+    "LoadingSession": "Chargement de la session..."
+  }
+}

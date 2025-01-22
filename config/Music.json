@@ -1,0 +1,24 @@
+{
+  "MusicWaveColor": "rgba(255, 255, 255, 0.664)",
+
+  "PlayList": [
+    {
+      "title": "Mortals Funk Remix",
+      "artist": "NCS",
+      "portrait": "https://i.ytimg.com/vi/pytdWKT-NV4/maxresdefault.jpg",
+      "url": "nui://w_loading/config/Music/MortalsFunkRemix.mp3"
+    },
+    {
+      "title": "Now Or Never",
+      "artist": "Infraction",
+      "portrait": "https://i.ytimg.com/vi/H4TMozFXwAo/maxresdefault.jpg",
+      "url": "nui://w_loading/config/Music/NowOrNever.mp3"
+    },
+    {
+      "title": "Good Vibe",
+      "artist": "Infraction",
+      "portrait": "https://i.ytimg.com/vi/SrY7LBvrY4g/maxresdefault.jpg",
+      "url": "nui://w_loading/config/Music/GoodVibe.mp3"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "Title": "News",
+  "Subtitle": "Here you can find the latest news about the city and its inhabitants",
+  "NewsTitleColor": "rgba(194, 0, 255, 1)",
+  "NewsAuthorColor": "rgba(194, 0, 255, 1)",
+  "News": [
+    {
+      "title": "New christmas event",
+      "text": "We are organizing a christmas event in the city. Don't miss it! Join us and have a great time! We are organizing a christmas event in the city. Don't miss it! Join us and have a great time!",
+      "img": "https://wallpapers.com/images/hd/1920x1080-hd-christmas-a4w9iz29xd804afm.jpg",
+      "date": "2023-01-01",
+      "time": "12:00",
+      "author": "Sedres"
+    },
+    {
+      "title": "Halloween event",
+      "text": "We are organizing a halloween event in the city. Don't miss it! Join us and have a great time! We are organizing a halloween event in the city. Don't miss it! Join us and have a great time!",
+      "date": "2023-01-01",
+      "time": "12:00",
+      "author": "John Doe"
+    },
+    {
+      "title": "Valentine's day event in the city",
+      "text": "We are organizing a valentine's day event in the city. Don't miss it! Join us and have a great time! We are organizing a valentine's day event in the city. Don't miss it! Join us and have a great time!",
+      "img": "https://img.freepik.com/foto-gratis/copia-espacio-lindos-corazones_23-2148393425.jpg?t=st=1737321190~exp=1737324790~hmac=0f8b67cab2b83d47f6d413067981cbf87f7d93b5853028a8479157144289d709&w=1380",
+      "date": "2023-01-01",
+      "time": "12:00",
+      "author": "John Doe"
+    }
+  ]
+}

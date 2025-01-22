@@ -1,0 +1,34 @@
+{
+  "Socials": [
+    {
+      "icon": "fa-brands fa-discord",
+      "text": "Discord",
+      "value": "discord",
+      "url": "https://discord.com/invite/ypqBF8gVCB"
+    },
+    {
+      "icon": "fa-brands fa-youtube",
+      "text": "Youtube",
+      "value": "youtube",
+      "url": "https://www.youtube.com/@sedres13"
+    },
+    {
+      "icon": "fa-brands fa-twitch",
+      "text": "Twitch",
+      "value": "twitch",
+      "url": "https://www.twitch.tv/sedres13"
+    },
+    {
+      "icon": "fa-brands fa-instagram",
+      "text": "Instagram",
+      "value": "instagram",
+      "url": "https://www.instagram.com/sedresAC/"
+    },
+    {
+      "icon": "fa-brands fa-twitter",
+      "text": "Twitter",
+      "value": "twitter",
+      "url": "https://twitter.com/sedres13"
+    }
+  ]
+}

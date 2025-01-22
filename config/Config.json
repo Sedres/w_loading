@@ -1,0 +1,15 @@
+{
+  "Language": "EN",
+  "MainColor": "rgba(255, 255, 255, 1)",
+  "ShadowColor": "rgba(195, 0, 255, 1)",
+  "LoadingColor": "rgba(195, 0, 255, 1)",
+  "LoadingAvatar": "https://i.ibb.co/vDz23X5/logo.jpg",
+
+  "Background": {
+    "IsImage": true,
+    "IsVideo": false,
+    "IsYouTube": false,
+    "Path": "https://images.hdqwalls.com/download/gta-free-mode-t0-1920x1080.jpg",
+    "VideoId": "DAQYMyzE8ww"
+  }
+}

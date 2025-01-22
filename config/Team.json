@@ -1,0 +1,53 @@
+{
+  "Title": "Team",
+  "Subtitle": "Here you can find the team of the city",
+  "Members": [
+    {
+      "name": "Sedres",
+      "role": "Developer",
+      "description": "The developer of the project",
+      "img": "https://i.pravatar.cc/300",
+      "socials": [
+        {
+          "name": "Discord",
+          "icon": "fa-brands fa-discord",
+          "link": "sedres#0001"
+        },
+
+        {
+          "name": "Instagram",
+          "icon": "fa-brands fa-instagram",
+          "link": "@SedresAC"
+        },
+        {
+          "name": "Twitter",
+          "icon": "fa-brands fa-twitter",
+          "link": "@Sedres13"
+        },
+        {
+          "name": "Twitch",
+          "icon": "fa-brands fa-twitch",
+          "link": "Sedres13"
+        }
+      ]
+    },
+    {
+      "name": "Paco",
+      "role": "Developer",
+      "description": "The developer of the project",
+      "img": "https://i.pravatar.cc/500"
+    },
+    {
+      "name": "Emily",
+      "role": "Tester",
+      "description": "The tester of the project ",
+      "img": "https://i.pravatar.cc/500"
+    },
+    {
+      "name": "John",
+      "role": "Admin",
+      "description": "The admin of the project",
+      "img": "https://i.pravatar.cc/500"
+    }
+  ]
+}
