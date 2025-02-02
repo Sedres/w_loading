@@ -18,7 +18,7 @@
       playsinline
       class="background-video"
     >
-      <source src="../assets/background.mp4" type="video/mp4" />
+      <source :src="background?.Path" type="video/mp4" />
       Tu navegador no soporta la reproducción de video.
     </video>
 

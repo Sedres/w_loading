@@ -48,7 +48,6 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
 import { useGlobalStore } from '@/stores/global'
 
 const globalStore = useGlobalStore()

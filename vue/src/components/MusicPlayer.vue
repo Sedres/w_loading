@@ -99,7 +99,6 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useGlobalStore } from '@/stores/global'
 
 const globalStore = useGlobalStore()

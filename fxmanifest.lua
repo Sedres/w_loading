@@ -11,8 +11,8 @@ loadscreen 'ui/index.html'
 files {
 	'ui/index.html',
 	'ui/assets/*.*',
+	'config/Music/*.mp3',
 	'config/*.json',
-	'config/Music/*.mp3'
 }
 
 loadscreen_cursor 'yes'
