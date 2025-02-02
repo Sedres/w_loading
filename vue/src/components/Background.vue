@@ -2,16 +2,16 @@
   <div>
     <!-- Imagen de fondo -->
     <v-img
-      v-if="Background.IsImage"
+      v-if="background?.IsImage"
       aspect-ratio="16/9"
       cover
-      :src="Background.Path"
+      :src="background.Path"
       class="background-image"
     ></v-img>
 
     <!-- Video local de fondo -->
     <video
-      v-else-if="Background.IsVideo"
+      v-else-if="background?.IsVideo"
       autoplay
       muted
       loop
@@ -24,7 +24,7 @@
 
     <!-- Video de YouTube de fondo -->
     <iframe
-      v-else-if="Background.IsYouTube"
+      v-else-if="background?.IsYouTube"
       :src="youtubeURL"
       class="background-youtube"
       frameborder="0"
@@ -35,18 +35,32 @@
 </template>
 
 <script setup>
-import { Background } from '../../../config/Config.json'
+import { computed, onMounted } from 'vue'
+import { useGlobalStore } from '@/stores/global'
 
+const globalStore = useGlobalStore()
+
+// Cargar la configuración si aún no está en la store
+onMounted(() => {
+  if (Object.keys(globalStore.config).length === 0) {
+    globalStore.loadJson('Config.json', 'config')
+  }
+})
+
+// Computed para evitar errores de acceso a `null`
+const background = computed(() => globalStore.config?.Background || {})
+
+// Computed para generar la URL de YouTube correctamente
 const youtubeURL = computed(() => {
-  if (!Background.VideoId) return ''
-  return `https://www.youtube.com/embed/${Background.VideoId}
+  if (!background.value.VideoId) return ''
+  return `https://www.youtube.com/embed/${background.value.VideoId}
     ?autoplay=1
     &mute=1
     &loop=1
     &controls=0
     &showinfo=0
     &rel=0
-    &playlist=${Background.VideoId}`.replace(/\s+/g, '') // Quita espacios
+    &playlist=${background.value.VideoId}`.replace(/\s+/g, '')
 })
 </script>
 

@@ -1,3 +1,10 @@
+<script setup>
+import { useGlobalStore } from '@/stores/global'
+const globalStore = useGlobalStore()
+onMounted(async () => {
+  await globalStore.loadAllConfigs()
+})
+</script>
 <template>
   <Background />
   <InfoCard />
@@ -7,7 +14,7 @@
     <LoadingCard />
   </v-container>
 </template>
-<script setup></script>
+
 <style>
 :root {
   --backgrounds: linear-gradient(

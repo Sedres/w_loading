@@ -57,7 +57,11 @@
 
 <script setup>
 import { MainColor, ShadowColor } from '../../../../config/Config.json'
-import teamData from '../../../../config/Team.json'
+import { useGlobalStore } from '@/stores/global'
+
+const globalStore = useGlobalStore()
+
+const teamData = globalStore.team
 </script>
 
 <style scoped>

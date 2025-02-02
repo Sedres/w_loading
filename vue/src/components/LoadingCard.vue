@@ -2,20 +2,21 @@
   <v-container class="loading-container">
     <v-card theme="dark" class="loading-container-info">
       <v-avatar
-        :image="ConfigData.LoadingAvatar"
+        v-if="config"
+        :image="config.LoadingAvatar"
         class="loading-avatar"
         size="100%"
       ></v-avatar>
-      <v-card-text class="text-body-1 pa-2">{{ LoadingText }}</v-card-text>
+      <v-card-text class="text-body-1 pa-2">{{ loadingText }}</v-card-text>
     </v-card>
     <v-card theme="dark" class="loading-card pa-2">
       <v-progress-circular
         indeterminate
-        :color="ConfigData.LoadingColor"
+        :color="config?.LoadingColor || 'white'"
         :size="25"
       ></v-progress-circular>
       <v-progress-linear
-        :model-value="LoadingProgress"
+        :model-value="loadingProgress"
         :height="10"
         class="loading-bar"
         max="1"
@@ -25,37 +26,62 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from 'vue'
+import { useGlobalStore } from '@/stores/global'
 import { useWindowEventListener } from '../utils/useServerMessages'
-import Translations from '../../../config/Language.json'
-import ConfigData from '../../../config/Config.json'
 
-const LoadingProgress = ref(0)
-const LoadingText = ref(Translations[ConfigData.Language]['LoadingDefault'])
+const globalStore = useGlobalStore()
 
-// Handler for "message" event
+const loadingProgress = ref(0)
+const loadingText = ref('Loading...')
+// Cargar la configuración si aún no está en la store
+onMounted(() => {
+  if (!globalStore.config) {
+    globalStore.loadJson('Config.json', 'config')
+  }
+  if (!globalStore.language) {
+    globalStore.loadJson('Language.json', 'language')
+  }
+})
+
+// Computed para obtener los datos actualizados de la store
+const config = computed(() => globalStore.config || {})
+const translations = computed(() => globalStore.language || {})
+
+// Actualizar el texto de carga según el idioma y la etapa de carga
 const handleMessage = (event) => {
   const data = event.data
 
+  if (!config.value || !translations.value) return
+
   switch (data.eventName) {
     case 'loadProgress':
-      LoadingProgress.value = data.loadFraction
+      loadingProgress.value = data.loadFraction
       break
     case 'initFunctionInvoked':
       switch (data.type) {
         case 'INIT_BEFORE_MAP_LOADED':
         case 'INIT_AFTER_MAP_LOADED':
-          LoadingText.value = Translations[ConfigData.Language]['LoadingMap']
+          loadingText.value =
+            translations.value[config.value.Language]?.LoadingMap ||
+            'Loading Map...'
           break
         case 'INIT_SESSION':
-          LoadingText.value =
-            Translations[ConfigData.Language]['LoadingSession']
+          loadingText.value =
+            translations.value[config.value.Language]?.LoadingSession ||
+            'Loading Session...'
+          break
+        default:
+          loadingText.value =
+            translations.value[config.value.Language]?.LoadingDefault ||
+            'Loading...'
           break
       }
       break
   }
 }
 
-// Use the composable to listen for the "message" event
+// Escuchar los eventos del servidor
 useWindowEventListener('message', handleMessage)
 </script>
 

@@ -43,7 +43,11 @@
 </template>
 
 <script setup>
-import newsData from '../../../../config/News.json'
+import { useGlobalStore } from '@/stores/global'
+
+const globalStore = useGlobalStore()
+
+const newsData = globalStore.news
 </script>
 
 <style scoped>

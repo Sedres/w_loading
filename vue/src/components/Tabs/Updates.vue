@@ -9,7 +9,7 @@
   <v-timeline>
     <v-timeline-item
       theme="dark"
-      v-for="update in updates"
+      v-for="update in globalStore.updates.Updates"
       :key="update.title"
       :icon="update.icon"
       :dot-color="update.color"
@@ -32,7 +32,9 @@
 </template>
 
 <script setup>
-import { Updates as updates } from '../../../../config/Updates.json'
+import { useGlobalStore } from '@/stores/global'
+
+const globalStore = useGlobalStore()
 </script>
 
 <style scoped>

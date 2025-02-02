@@ -11,6 +11,7 @@ loadscreen 'ui/index.html'
 files {
 	'ui/index.html',
 	'ui/assets/*.*',
+	'config/*.json',
 	'config/Music/*.mp3'
 }
 

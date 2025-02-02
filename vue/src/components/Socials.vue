@@ -1,7 +1,7 @@
 <template>
   <v-sheet theme="dark" class="socials">
     <v-btn
-      v-for="social in Socials"
+      v-for="social in globalStore.socials?.Socials"
       :key="social.icon"
       theme="dark"
       :ripple="false"
@@ -15,8 +15,14 @@
 </template>
 
 <script setup>
-import { ShadowColor } from '../../../config/Config.json'
-import { Socials } from '../../../config/Socials.json'
+import { useGlobalStore } from '@/stores/global'
+
+const globalStore = useGlobalStore()
+
+// Computed para usar el ShadowColor con v-bind
+const shadowColor = computed(
+  () => globalStore.config?.ShadowColor || 'rgba(255, 255, 255, 1)'
+)
 
 function openUrl(url) {
   if (window.invokeNative) {
@@ -57,7 +63,7 @@ function openUrl(url) {
 
 .socials-btn:hover {
   scale: 1.1;
-  box-shadow: 0 0px 20px v-bind(ShadowColor);
+  box-shadow: 0 0px 20px v-bind(shadowColor);
 }
 
 .socials-btn:active {

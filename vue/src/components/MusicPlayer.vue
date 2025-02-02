@@ -2,6 +2,7 @@
   <v-container class="music-player-container">
     <div class="music-avatar-container" @click="expand">
       <v-avatar
+        v-if="currentSong"
         :image="currentSong.portrait"
         class="music-avatar"
         ripple="false"
@@ -15,6 +16,7 @@
         <div class="wave"></div>
       </div>
     </div>
+
     <v-expand-x-transition>
       <v-card
         theme="dark"
@@ -27,14 +29,14 @@
               <!-- Información de la canción -->
               <div class="music-details">
                 <p class="song-title">
-                  {{ currentSong.title || 'Song Title' }}
+                  {{ currentSong?.title || 'Song Title' }}
                 </p>
                 <p class="artist-name">
-                  {{ currentSong.artist || 'Artist Name' }}
+                  {{ currentSong?.artist || 'Artist Name' }}
                 </p>
               </div>
 
-              <!-- Controles principales -->
+              <!-- Controles -->
               <div class="music-controls">
                 <v-btn
                   ripple="false"
@@ -60,16 +62,19 @@
               </div>
             </div>
 
+            <!-- Barra de progreso -->
             <v-progress-linear
               class="progress-bar"
               height="10"
-              v-model="progress"
+              :model-value="progress"
               max="100"
               clickable
               @update:modelValue="handleProgressChange"
             ></v-progress-linear>
           </v-container>
         </v-fade-transition>
+
+        <!-- Control de volumen -->
         <v-fade-transition>
           <v-container class="slider" v-show="expanded">
             <input
@@ -81,51 +86,65 @@
               @input="updateVolume"
               orient="vertical"
             />
-            <v-icon class="volume"> fa-solid fa-volume-high</v-icon>
+            <v-icon class="volume">fa-solid fa-volume-high</v-icon>
           </v-container>
         </v-fade-transition>
       </v-card>
     </v-expand-x-transition>
+
     <audio autoplay id="player" ref="audioPlayer">
-      <source :src="currentSong.url" type="audio/mp3" />
+      <source v-if="currentSong" :src="currentSong.url" type="audio/mp3" />
     </audio>
   </v-container>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import { MusicWaveColor, PlayList } from '../../../config/Music.json'
-import { MainColor, ShadowColor } from '../../../config/Config.json'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { useGlobalStore } from '@/stores/global'
 
-// Estado de la aplicación
+const globalStore = useGlobalStore()
 const currentSongIndex = ref(0)
-const currentSong = ref(PlayList[currentSongIndex.value])
 const isPlaying = ref(true)
-const progress = ref(0) // Progreso en porcentaje
-const volume = ref(50) // Volumen inicial al 50%
+const progress = ref(0)
 const expanded = ref(false)
+const volume = ref(50)
 const audioPlayer = ref(null)
 
-// Cargar una canción
-const loadSong = () => {
-  currentSong.value = PlayList[currentSongIndex.value]
-  if (audioPlayer.value) {
-    audioPlayer.value.src = currentSong.value.url
+// Cargar datos desde la store
+onMounted(() => {
+  if (!globalStore.music) globalStore.loadJson('Music.json', 'music')
+  if (!globalStore.config) globalStore.loadJson('Config.json', 'config')
+})
+
+// Computed para obtener los valores actualizados de la store
+const playList = computed(() => globalStore.music?.PlayList || [])
+const currentSong = computed(
+  () => playList.value[currentSongIndex.value] || null
+)
+const musicWaveColor = computed(
+  () => globalStore.music?.MusicWaveColor || 'rgba(255, 255, 255, 0.664)'
+)
+const mainColor = computed(() => globalStore.config?.MainColor || '#FFFFFF')
+// Observador para actualizar el audio cuando cambia la canción
+watch(currentSong, (newSong) => {
+  if (audioPlayer.value && newSong) {
+    audioPlayer.value.src = newSong.url
     audioPlayer.value.load()
     progress.value = 0
+    isPlaying.value = true // Se asegura que el botón de play refleje el estado inicial
   }
-}
+})
 
-// Reproducir canción
+// Funciones de reproducción
 const playSong = () => {
   if (audioPlayer.value) {
     audioPlayer.value.play().then(() => {
       isPlaying.value = true
+      updateProgress()
     })
   }
 }
 
-// Pausar canción
 const pauseSong = () => {
   if (audioPlayer.value) {
     audioPlayer.value.pause()
@@ -133,55 +152,56 @@ const pauseSong = () => {
   }
 }
 
-// Alternar reproducción/pausa
 const togglePlay = () => {
   isPlaying.value ? pauseSong() : playSong()
 }
 
-// Ir a la siguiente canción
+// Funciones para cambiar de canción
 const next = () => {
-  currentSongIndex.value = (currentSongIndex.value + 1) % PlayList.length
-  loadSong()
-  playSong()
-}
-
-// Ir a la canción anterior
-const previous = () => {
-  currentSongIndex.value =
-    (currentSongIndex.value - 1 + PlayList.length) % PlayList.length
-  loadSong()
-  playSong()
-}
-
-// Actualizar progreso
-const handleProgressChange = (newValue) => {
-  if (audioPlayer.value && audioPlayer.value.duration) {
-    const seekTime = (newValue / 100) * audioPlayer.value.duration
-    audioPlayer.value.currentTime = seekTime // Actualiza la posición del audio
+  if (playList.value.length > 0) {
+    currentSongIndex.value =
+      (currentSongIndex.value + 1) % playList.value.length
   }
 }
 
+const previous = () => {
+  if (playList.value.length > 0) {
+    currentSongIndex.value =
+      (currentSongIndex.value - 1 + playList.value.length) %
+      playList.value.length
+  }
+}
+
+// Manejo del progreso
+const handleProgressChange = (newValue) => {
+  if (audioPlayer.value && audioPlayer.value.duration) {
+    const seekTime = (newValue / 100) * audioPlayer.value.duration
+    audioPlayer.value.currentTime = seekTime
+  }
+}
+
+// Actualizar la barra de progreso en tiempo real
 const updateProgress = () => {
   if (audioPlayer.value && audioPlayer.value.duration) {
     progress.value =
       (audioPlayer.value.currentTime / audioPlayer.value.duration) * 100
+    requestAnimationFrame(updateProgress)
   }
 }
 
-// Actualizar volumen
+// Control de volumen
 const updateVolume = () => {
   if (audioPlayer.value) {
     audioPlayer.value.volume = volume.value / 100
   }
 }
 
-// Montar eventos
+// Eventos al montar y desmontar
 onMounted(() => {
   if (audioPlayer.value) {
-    audioPlayer.value.volume = volume.value / 100
     audioPlayer.value.addEventListener('timeupdate', updateProgress)
     audioPlayer.value.addEventListener('ended', next)
-    loadSong()
+    updateVolume() // Aplica el volumen inicial
   }
 })
 
@@ -192,7 +212,7 @@ onUnmounted(() => {
   }
 })
 
-// Expandir/contraer detalles
+// Expandir detalles
 const expand = () => {
   expanded.value = !expanded.value
 }
@@ -260,7 +280,7 @@ const expand = () => {
 .wave {
   width: 5px;
   height: 20px;
-  background: v-bind(MusicWaveColor);
+  background: v-bind(musicWaveColor);
   border-radius: 16px;
   animation: wave 1s infinite ease-in-out;
 }
@@ -335,7 +355,7 @@ const expand = () => {
   --slider-height: 20px;
   --slider-bg: rgba(82, 82, 82, 0.3);
   --slider-border-radius: 10px;
-  --level-color: v-bind(MainColor);
+  --level-color: v-bind(mainColor);
   --level-transition-duration: 0.1s;
 }
 

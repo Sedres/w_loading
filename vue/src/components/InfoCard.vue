@@ -5,26 +5,28 @@
       <div class="tab-header-wrapper">
         <v-tabs v-model="tab" class="tab-header">
           <v-tab
-            v-for="tab in tabs"
-            :key="tab.value"
-            :value="tab.value"
+            v-for="t in tabs"
+            :key="t.value"
+            :value="t.value"
             class="tab-button"
             :ripple="false"
             variant="text"
             v-show="expanded"
           >
-            <v-icon class="tab-icon">{{ tab.icon }}</v-icon>
+            <v-icon class="tab-icon">{{ t.icon }}</v-icon>
           </v-tab>
           <v-tab
             value="expand"
             class="tab-button"
             @click="expanded = !expanded"
           >
-            <v-icon class="tab-icon">{{
-              expanded
-                ? 'fa-solid fa-chevron-right'
-                : 'fa-solid fa-chevron-left'
-            }}</v-icon>
+            <v-icon class="tab-icon">
+              {{
+                expanded
+                  ? 'fa-solid fa-chevron-right'
+                  : 'fa-solid fa-chevron-left'
+              }}
+            </v-icon>
           </v-tab>
         </v-tabs>
       </div>
@@ -34,11 +36,7 @@
         <v-tabs-window-item value="news" class="news-container">
           <News />
         </v-tabs-window-item>
-        <v-tabs-window-item
-          value="team"
-          class="team-container pa-1"
-          user-select="none"
-        >
+        <v-tabs-window-item value="team" class="team-container pa-1">
           <Team />
         </v-tabs-window-item>
         <v-tabs-window-item value="updates">
@@ -50,25 +48,29 @@
 </template>
 
 <script setup>
-import { MainColor, ShadowColor } from '../../../config/Config.json'
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useGlobalStore } from '@/stores/global'
 
+const globalStore = useGlobalStore()
 const expanded = ref(false)
 const tab = ref('expand')
+
 const tabs = [
-  {
-    icon: 'fa-solid fa-newspaper',
-    value: 'news'
-  },
-  {
-    icon: 'fa-solid fa-users',
-    value: 'team'
-  },
-  {
-    icon: 'fa-solid fa-scroll',
-    value: 'updates'
-  }
+  { icon: 'fa-solid fa-newspaper', value: 'news' },
+  { icon: 'fa-solid fa-users', value: 'team' },
+  { icon: 'fa-solid fa-scroll', value: 'updates' }
 ]
+
+// Cargar configuración si aún no está en la store
+onMounted(() => {
+  if (!globalStore.config) {
+    globalStore.loadJson('Config.json', 'config')
+  }
+})
+
+// Computed para colores dinámicos desde la store
+const mainColor = computed(() => globalStore.config?.MainColor || '#FFFFFF')
+const shadowColor = computed(() => globalStore.config?.ShadowColor || '#FFFFFF')
 </script>
 
 <style scoped>
@@ -116,7 +118,7 @@ const tabs = [
 
 /* Individual tab button styles */
 .tab-button {
-  color: v-bind(MainColor);
+  color: v-bind(mainColor);
 }
 
 .tab-icon {
@@ -125,7 +127,7 @@ const tabs = [
 }
 
 .tab-button:hover .tab-icon {
-  text-shadow: 0px 0px 20px v-bind(ShadowColor);
+  text-shadow: 0px 0px 20px v-bind(shadowColor);
   scale: 1.1;
 }
 
@@ -135,15 +137,12 @@ const tabs = [
 
 /* Tabs window content */
 .tab-content {
-  flex: 1 1 auto; /* Take remaining space */
-  overflow-y: auto; /* Enable vertical scroll if necessary */
+  flex: 1 1 auto;
+  overflow-y: auto;
   position: relative;
 }
 
-.news-container {
-  user-select: none;
-}
-
+.news-container,
 .team-container {
   user-select: none;
 }
