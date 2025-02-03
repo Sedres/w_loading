@@ -93,33 +93,34 @@
     </v-expand-x-transition>
 
     <audio autoplay id="player" ref="audioPlayer">
-      <source v-if="currentSong" :src="currentSong.url" type="audio/mp3" />
+      <source
+        v-if="currentSong"
+        :src="currentSong.url ? 'nui://w_loading/' + currentSong.url : ''"
+        type="audio/mp3"
+      />
     </audio>
   </v-container>
 </template>
 
 <script setup>
 import { useGlobalStore } from '@/stores/global'
-
 const globalStore = useGlobalStore()
+// Computed que obtiene la playlist
+const playList = computed(() => globalStore.music?.PlayList || [])
+
 const currentSongIndex = ref(0)
+
 const isPlaying = ref(true)
 const progress = ref(0)
 const expanded = ref(false)
-const volume = ref(50)
+const volume = ref(globalStore.music?.BaseVolume ?? 50)
 const audioPlayer = ref(null)
 
-// Cargar datos desde la store
-onMounted(() => {
-  if (!globalStore.music) globalStore.loadJson('Music.json', 'music')
-  if (!globalStore.config) globalStore.loadJson('Config.json', 'config')
-})
-
-// Computed para obtener los valores actualizados de la store
-const playList = computed(() => globalStore.music?.PlayList || [])
+// Función para obtener un índice aleatori
 const currentSong = computed(
   () => playList.value[currentSongIndex.value] || null
 )
+
 const musicWaveColor = computed(
   () => globalStore.music?.MusicWaveColor || 'rgba(255, 255, 255, 0.664)'
 )
@@ -127,7 +128,7 @@ const mainColor = computed(() => globalStore.config?.MainColor || '#FFFFFF')
 // Observador para actualizar el audio cuando cambia la canción
 watch(currentSong, (newSong) => {
   if (audioPlayer.value && newSong) {
-    audioPlayer.value.src = newSong.url
+    audioPlayer.value.src = 'nui://w_loading/' + newSong.url
     audioPlayer.value.load()
     progress.value = 0
     isPlaying.value = true // Se asegura que el botón de play refleje el estado inicial
@@ -196,11 +197,26 @@ const updateVolume = () => {
 }
 
 // Eventos al montar y desmontar
-onMounted(() => {
+onMounted(async () => {
+  // Si no está cargado, lo cargamos:
+  if (!globalStore.music) {
+    await globalStore.loadJson('Music.json', 'music')
+  }
+  if (!globalStore.config) {
+    await globalStore.loadJson('Config.json', 'config')
+  }
+
+  // En este punto ya debería existir `globalStore.music?.BaseVolume`
+  volume.value = globalStore.music?.BaseVolume ?? 50
+
+  currentSongIndex.value = globalStore.music
+    ? Math.floor(Math.random() * playList.value.length)
+    : 0
+
   if (audioPlayer.value) {
     audioPlayer.value.addEventListener('timeupdate', updateProgress)
     audioPlayer.value.addEventListener('ended', next)
-    updateVolume() // Aplica el volumen inicial
+    updateVolume()
   }
 })
 
@@ -209,6 +225,9 @@ onUnmounted(() => {
     audioPlayer.value.removeEventListener('timeupdate', updateProgress)
     audioPlayer.value.removeEventListener('ended', next)
   }
+  currentSongIndex.value = globalStore.music
+    ? Math.floor(Math.random() * playList.value.length)
+    : 0
 })
 
 // Expandir detalles

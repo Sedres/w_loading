@@ -9,7 +9,7 @@
     "IsImage": false,
     "IsVideo": true,
     "IsYouTube": false,
-    "Path": "nui://w_loading/config/Background/background.mp4",
+    "Path": "config/Background/background.mp4",
     "VideoId": "DAQYMyzE8ww"
   }
 }

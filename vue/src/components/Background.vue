@@ -18,7 +18,10 @@
       playsinline
       class="background-video"
     >
-      <source :src="background?.Path" type="video/mp4" />
+      <source
+        :src="background.Path ? 'nui://w_loading/' + background.Path : ''"
+        type="video/mp4"
+      />
       Tu navegador no soporta la reproducción de video.
     </video>
 
@@ -41,7 +44,7 @@ import { useGlobalStore } from '@/stores/global'
 const globalStore = useGlobalStore()
 
 // Cargar la configuración si aún no está en la store
-onMounted(() => {
+onMounted(async () => {
   if (Object.keys(globalStore.config).length === 0) {
     globalStore.loadJson('Config.json', 'config')
   }

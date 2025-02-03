@@ -8,10 +8,11 @@ version "3.0"
 
 loadscreen 'ui/index.html'
 
+
 files {
 	'ui/index.html',
 	'ui/assets/*.*',
-	'config/Music/*.mp3',
+	'config/Music/*.*',
 	'config/Background/*.*',
 	'config/*.json',
 }
