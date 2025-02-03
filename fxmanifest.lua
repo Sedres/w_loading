@@ -12,6 +12,7 @@ files {
 	'ui/index.html',
 	'ui/assets/*.*',
 	'config/Music/*.mp3',
+	'config/Background/*.*',
 	'config/*.json',
 }
 

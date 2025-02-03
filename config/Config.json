@@ -6,10 +6,10 @@
   "LoadingAvatar": "https://i.ibb.co/vDz23X5/logo.jpg",
 
   "Background": {
-    "IsImage": true,
-    "IsVideo": false,
+    "IsImage": false,
+    "IsVideo": true,
     "IsYouTube": false,
-    "Path": "https://images.hdqwalls.com/download/gta-free-mode-t0-1920x1080.jpg",
+    "Path": "nui://w_loading/config/Background/background.mp4",
     "VideoId": "DAQYMyzE8ww"
   }
 }
