@@ -20,8 +20,3 @@ files {
 
 loadscreen_cursor 'yes'
 loadscreen_manual_shutdown 'yes' -- Comment to disable manual shutdown
-
-
-client_scripts {
-	'client/*.lua'
-}
