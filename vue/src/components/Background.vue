@@ -37,15 +37,18 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { useGlobalStore } from '@/stores/global'
 
 const globalStore = useGlobalStore()
 const videoElement = ref(null)
 
 // Asegurar que la configuración esté cargada
-onMounted(async () => {
+onBeforeMount(async () => {
+  console.log('Cargando configuración...')
+
   if (!globalStore.config.Background) {
+    console.log('Cargando configuración... no encontrada')
     await globalStore.loadJson('Config.json', 'config')
   }
 })
