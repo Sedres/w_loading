@@ -11,17 +11,21 @@
 
     <!-- Video local de fondo -->
     <video
-      v-else-if="isVideo"
+      v-if="isVideo && videoSource"
       autoplay
       muted
       loop
       playsinline
       class="background-video"
-      @error="reloadVideo"
       ref="videoElement"
+      preload="none"
+      @canplay="handleCanPlay"
+      @error="reloadVideo"
     >
-      <source :src="videoSource" type="video/mp4" />
-      Tu navegador no soporta la reproducción de video.
+      <source
+        :src="videoSource + '?nocache=' + new Date().getTime()"
+        type="video/mp4"
+      />
     </video>
 
     <!-- Video de YouTube de fondo -->

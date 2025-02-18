@@ -1,24 +1,52 @@
 <script setup>
-import { useJsonLoader } from '@/utils/useJsonLoader'
+// 🔹 Definir variables reactivas para los JSONs
+const config = shallowRef(null)
+const language = shallowRef(null)
+const music = shallowRef(null)
+const news = shallowRef(null)
+const socials = shallowRef(null)
+const team = shallowRef(null)
+const updates = shallowRef(null)
 
-// Cargar JSONs desde la carpeta `/config/`
-const { data: news } = useJsonLoader('News.json')
-const { data: socials } = useJsonLoader('Socials.json')
-const { data: team } = useJsonLoader('Team.json')
-const { data: updates } = useJsonLoader('Updates.json')
-const { data: config } = useJsonLoader('Config.json')
-const { data: language } = useJsonLoader('Language.json')
-const { data: music } = useJsonLoader('Music.json')
+// 🔹 Función para cargar un JSON
+const loadJson = async (filename, refVar) => {
+  try {
+    const response = await fetch(`/config/${filename}`)
+    if (!response.ok) throw new Error(`Failed to load ${filename}`)
+    refVar.value = await response.json()
+  } catch (error) {
+    console.error(`Error loading ${filename}:`, error)
+    refVar.value = null
+  }
+}
+
+// 🔹 Cargar todos los JSONs en el montaje de la app
+onBeforeMount(() => {
+  Promise.all([
+    loadJson('Config.json', config),
+    loadJson('Language.json', language),
+    loadJson('Music.json', music),
+    loadJson('News.json', news),
+    loadJson('Socials.json', socials),
+    loadJson('Team.json', team),
+    loadJson('Updates.json', updates)
+  ])
+})
 </script>
 
 <template>
-  <Background :config="config" />
-  <InfoCard :news="news" :team="team" :updates="updates" :config="config" />
-  <v-container class="bottom-container">
-    <MusicPlayer :music="music" :config="config" />
-    <Socials :socials="socials" :config="config" />
-    <LoadingCard :config="config" :language="language" />
-  </v-container>
+  <!-- 🔹 Renderizar los componentes solo cuando los JSONs estén listos -->
+  <template
+    v-if="config && language && music && news && socials && team && updates"
+  >
+    <Background :config="config" />
+    <InfoCard :news="news" :team="team" :updates="updates" :config="config" />
+    <v-container class="bottom-container">
+      <MusicPlayer :music="music" :config="config" />
+      <Socials :socials="socials" :config="config" />
+      <LoadingCard :config="config" :language="language" />
+    </v-container>
+  </template>
 </template>
 
 <style>
