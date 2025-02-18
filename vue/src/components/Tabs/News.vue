@@ -1,15 +1,15 @@
 <template>
   <v-card rounded theme="dark" class="pa-2 title-card">
-    <v-card-title class="text-h4">{{ newsData.Title }}</v-card-title>
+    <v-card-title class="text-h4">{{ newsData?.Title }}</v-card-title>
     <v-card-subtitle class="text-body-1 text-h6">
-      {{ newsData.Subtitle }}
+      {{ newsData?.Subtitle }}
     </v-card-subtitle>
   </v-card>
 
   <v-fade-transition>
     <v-container class="news-container-wrapper">
       <v-card
-        v-for="news in newsData.News"
+        v-for="news in newsData?.News"
         :key="news.title"
         theme="dark"
         class="news-card"
@@ -43,11 +43,16 @@
 </template>
 
 <script setup>
-import { useGlobalStore } from '@/stores/global'
+import { computed } from 'vue'
 
-const globalStore = useGlobalStore()
+// Recibir los datos de noticias desde el componente padre
+const props = defineProps({
+  newsData: Object
+})
 
-const newsData = globalStore.news
+// Computed para evitar errores si `newsData` aún no está disponible
+const titleColor = computed(() => props.newsData?.NewsTitleColor || '#FFFFFF')
+const authorColor = computed(() => props.newsData?.NewsAuthorColor || '#FFFFFF')
 </script>
 
 <style scoped>
@@ -83,7 +88,7 @@ const newsData = globalStore.news
 }
 
 .news-author-name {
-  background: v-bind('newsData.NewsAuthorColor');
+  background: v-bind(authorColor);
   border-radius: 10px;
 }
 
@@ -93,7 +98,7 @@ const newsData = globalStore.news
   left: 50%;
   transform: translateX(-50%);
   width: fit-content;
-  background: v-bind('newsData.NewsTitleColor');
+  background: v-bind(titleColor);
   border-radius: 10px;
 
   z-index: 1;

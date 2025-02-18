@@ -4,10 +4,9 @@ game 'gta5'
 name "w_loading"
 description "Modern Fivem Loading Screen"
 author "sedres"
-version "3.0"
+version "3.2"
 
 loadscreen 'ui/index.html'
--- ui_page 'ui/index.html'
 
 
 files {

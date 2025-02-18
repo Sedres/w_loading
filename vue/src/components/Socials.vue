@@ -1,7 +1,7 @@
 <template>
   <v-sheet theme="dark" class="socials">
     <v-btn
-      v-for="social in globalStore.socials?.Socials"
+      v-for="social in socials?.Socials"
       :key="social.icon"
       theme="dark"
       :ripple="false"
@@ -15,20 +15,21 @@
 </template>
 
 <script setup>
-import { useGlobalStore } from '@/stores/global'
-
-const globalStore = useGlobalStore()
-
-// Computed para usar el ShadowColor con v-bind
+// Recibir `socials` y `config` como props desde el padre
+const props = defineProps({
+  socials: Object,
+  config: Object
+})
 const shadowColor = computed(
-  () => globalStore.config?.ShadowColor || 'rgba(255, 255, 255, 1)'
+  () => props.config?.ShadowColor || 'rgba(255, 255, 255, 1)'
 )
-
+// Función para abrir enlaces, compatible con `invokeNative`
 function openUrl(url) {
+  if (typeof url !== 'string') return
   if (window.invokeNative) {
     window.invokeNative('openUrl', url)
   } else {
-    console.error('invokeNative no está disponible.')
+    window.open(url, '_blank')
   }
 }
 </script>

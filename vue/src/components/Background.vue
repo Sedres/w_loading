@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div v-if="config">
     <!-- Imagen de fondo -->
     <v-img
       v-if="isImage"
       aspect-ratio="16/9"
       cover
-      :src="background.Path"
+      :src="config.Background.Path"
       class="background-image"
     ></v-img>
 
@@ -37,32 +37,27 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
-import { useGlobalStore } from '@/stores/global'
+import { computed, ref } from 'vue'
 
-const globalStore = useGlobalStore()
-const videoElement = ref(null)
-
-// Asegurar que la configuración esté cargada
-onBeforeMount(async () => {
-  console.log('Cargando configuración...')
-
-  if (!globalStore.config.Background) {
-    console.log('Cargando configuración... no encontrada')
-    await globalStore.loadJson('Config.json', 'config')
-  }
+// Recibir la configuración desde el padre
+const props = defineProps({
+  config: Object
 })
 
-// Computed properties para simplificar condiciones
-const background = computed(() => globalStore.config?.Background || {})
+// Desestructurar `config` para evitar acceder directamente a `props.config`
+const background = computed(() => props.config?.Background || {})
+
+const videoElement = ref(null)
+
+// Computed properties para acceder a la configuración de fondo de forma segura
 const isImage = computed(
-  () => background.value?.IsImage && background.value.Path
+  () => background.value?.IsImage && background.value?.Path
 )
 const isVideo = computed(
-  () => background.value?.IsVideo && background.value.Path
+  () => background.value?.IsVideo && background.value?.Path
 )
 const isYouTube = computed(
-  () => background.value?.IsYouTube && background.value.VideoId
+  () => background.value?.IsYouTube && background.value?.VideoId
 )
 
 // Fuente del video (manejo seguro)
@@ -84,15 +79,6 @@ const reloadVideo = () => {
     videoElement.value.load()
   }
 }
-
-// Vigilar cambios en la configuración para recargar si es necesario
-watch(background, (newVal, oldVal) => {
-  if (newVal.Path !== oldVal.Path) {
-    if (videoElement.value) {
-      videoElement.value.load()
-    }
-  }
-})
 </script>
 
 <style scoped>

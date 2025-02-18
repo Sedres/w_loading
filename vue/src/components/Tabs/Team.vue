@@ -1,23 +1,24 @@
 <template>
   <v-card rounded theme="dark" class="pa-2 title-card">
-    <v-card-title class="text-h4">{{ teamData.Title }}</v-card-title>
-    <v-card-subtitle class="text-body-1 text-h6">{{
-      teamData.Subtitle
-    }}</v-card-subtitle>
+    <v-card-title class="text-h4">{{ teamData?.Title }}</v-card-title>
+    <v-card-subtitle class="text-body-1 text-h6">
+      {{ teamData?.Subtitle }}
+    </v-card-subtitle>
   </v-card>
 
   <v-container class="team-container">
     <v-card
-      v-for="member in teamData.Members"
+      v-for="member in teamData?.Members"
+      :key="member.name"
       theme="dark"
       class="team-card"
       rounded
     >
       <v-container class="team-avatar-container">
         <v-avatar
+          v-if="member.img"
           :image="member.img"
           class="team-avatar"
-          :key="member.name"
         ></v-avatar>
         <v-container class="team-avatar-background">
           <v-card-title class="text-h5 pa-2">{{ member.name }}</v-card-title>
@@ -25,21 +26,23 @@
             member.role
           }}</v-card-subtitle>
           <v-divider></v-divider>
-          <v-card-text class="text-body-1 pa-2 text-justify"
-            >{{ member.description }}
+          <v-card-text class="text-body-1 pa-2 text-justify">
+            {{ member.description }}
           </v-card-text>
         </v-container>
       </v-container>
 
       <!-- Redes sociales -->
-
       <v-divider
-        v-if="member.socials"
+        v-if="member.socials && member.socials.length"
         theme="dark"
         class="pa-2"
         width="100%"
       ></v-divider>
-      <v-container v-if="member.socials" class="team-socials-container">
+      <v-container
+        v-if="member.socials && member.socials.length"
+        class="team-socials-container"
+      >
         <v-btn
           v-for="social in member.socials"
           :key="social.name"
@@ -56,12 +59,17 @@
 </template>
 
 <script setup>
-import { MainColor, ShadowColor } from '../../../../config/Config.json'
-import { useGlobalStore } from '@/stores/global'
+import { computed } from 'vue'
 
-const globalStore = useGlobalStore()
+// Recibir `teamData` y `config` como props
+const props = defineProps({
+  teamData: Object,
+  config: Object
+})
 
-const teamData = globalStore.team
+// Computed para los colores dinámicos
+const mainColor = computed(() => props.config?.MainColor || '#FFFFFF')
+const shadowColor = computed(() => props.config?.ShadowColor || '#FFFFFF')
 </script>
 
 <style scoped>
@@ -69,7 +77,6 @@ const teamData = globalStore.team
   position: sticky;
   top: 0;
   z-index: 1;
-
   background: var(--backgrounds);
   backdrop-filter: blur(10px);
 }
@@ -91,14 +98,13 @@ const teamData = globalStore.team
   display: flex;
   flex-direction: column;
   align-items: center;
-
   height: fit-content;
   background: var(--backgrounds);
   border-radius: 16px;
 }
 
 .team-card:hover {
-  box-shadow: inset 0px 0px 10px v-bind(MainColor);
+  box-shadow: inset 0px 0px 10px v-bind(mainColor);
 }
 .team-avatar {
   user-select: none;
@@ -118,8 +124,8 @@ const teamData = globalStore.team
 }
 
 .team-socials-btn {
-  width: 100%; /* Asegura que ocupen todo el ancho de la celda */
-  max-width: 200px; /* Evita botones demasiado grandes */
+  width: 100%;
+  max-width: 200px;
   height: 50px;
   color: #fff;
   border-radius: 10px;
@@ -133,6 +139,6 @@ const teamData = globalStore.team
 
 .team-socials-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0px 0px 10px v-bind(ShadowColor);
+  box-shadow: 0px 0px 10px v-bind(shadowColor);
 }
 </style>

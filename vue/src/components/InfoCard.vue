@@ -34,13 +34,13 @@
       <!-- Tabs Content -->
       <v-tabs-window v-model="tab" class="tab-content" v-show="expanded">
         <v-tabs-window-item value="news" class="news-container">
-          <News />
+          <News :newsData="news" />
         </v-tabs-window-item>
         <v-tabs-window-item value="team" class="team-container pa-1">
-          <Team />
+          <Team :teamData="team" :config="config" />
         </v-tabs-window-item>
         <v-tabs-window-item value="updates">
-          <Updates />
+          <Updates :updates="updates" />
         </v-tabs-window-item>
       </v-tabs-window>
     </v-card>
@@ -48,9 +48,16 @@
 </template>
 
 <script setup>
-import { useGlobalStore } from '@/stores/global'
+import { ref, computed } from 'vue'
 
-const globalStore = useGlobalStore()
+// Recibir `config`, `news`, `team`, `updates` desde el padre
+const props = defineProps({
+  config: Object,
+  news: Object,
+  team: Object,
+  updates: Object
+})
+
 const expanded = ref(false)
 const tab = ref('expand')
 
@@ -60,16 +67,9 @@ const tabs = [
   { icon: 'fa-solid fa-scroll', value: 'updates' }
 ]
 
-// Cargar configuración si aún no está en la store
-onMounted(() => {
-  if (!globalStore.config) {
-    globalStore.loadJson('Config.json', 'config')
-  }
-})
-
-// Computed para colores dinámicos desde la store
-const mainColor = computed(() => globalStore.config?.MainColor || '#FFFFFF')
-const shadowColor = computed(() => globalStore.config?.ShadowColor || '#FFFFFF')
+// Computed para colores dinámicos basados en la configuración
+const mainColor = computed(() => props.config?.MainColor || '#FFFFFF')
+const shadowColor = computed(() => props.config?.ShadowColor || '#FFFFFF')
 </script>
 
 <style scoped>

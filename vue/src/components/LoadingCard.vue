@@ -26,32 +26,24 @@
 </template>
 
 <script setup>
-import { useGlobalStore } from '@/stores/global'
 import { useWindowEventListener } from '../utils/useServerMessages'
 
-const globalStore = useGlobalStore()
+// Recibir `config` y `language` como props desde el padre
+const props = defineProps({
+  config: Object,
+  language: Object
+})
 
 const loadingProgress = ref(0)
 const loadingText = ref('Loading...')
-// Cargar la configuración si aún no está en la store
-onMounted(() => {
-  if (!globalStore.config) {
-    globalStore.loadJson('Config.json', 'config')
-  }
-  if (!globalStore.language) {
-    globalStore.loadJson('Language.json', 'language')
-  }
-})
-
-// Computed para obtener los datos actualizados de la store
-const config = computed(() => globalStore.config || {})
-const translations = computed(() => globalStore.language || {})
 
 // Actualizar el texto de carga según el idioma y la etapa de carga
 const handleMessage = (event) => {
   const data = event.data
 
-  if (!config.value || !translations.value) return
+  if (!props.config || !props.language) return
+
+  const currentLang = props.language?.[props.config.Language] || {}
 
   switch (data.eventName) {
     case 'loadProgress':
@@ -61,19 +53,14 @@ const handleMessage = (event) => {
       switch (data.type) {
         case 'INIT_BEFORE_MAP_LOADED':
         case 'INIT_AFTER_MAP_LOADED':
-          loadingText.value =
-            translations.value[config.value.Language]?.LoadingMap ||
-            'Loading Map...'
+          loadingText.value = currentLang?.LoadingMap || 'Loading Map...'
           break
         case 'INIT_SESSION':
           loadingText.value =
-            translations.value[config.value.Language]?.LoadingSession ||
-            'Loading Session...'
+            currentLang?.LoadingSession || 'Loading Session...'
           break
         default:
-          loadingText.value =
-            translations.value[config.value.Language]?.LoadingDefault ||
-            'Loading...'
+          loadingText.value = currentLang?.LoadingDefault || 'Loading...'
           break
       }
       break

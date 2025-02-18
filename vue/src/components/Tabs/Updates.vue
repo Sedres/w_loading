@@ -8,8 +8,7 @@
 
   <v-timeline>
     <v-timeline-item
-      theme="dark"
-      v-for="update in globalStore.updates.Updates"
+      v-for="update in updates?.Updates"
       :key="update.title"
       :icon="update.icon"
       :dot-color="update.color"
@@ -32,9 +31,10 @@
 </template>
 
 <script setup>
-import { useGlobalStore } from '@/stores/global'
-
-const globalStore = useGlobalStore()
+// Recibir `updates` como prop desde el componente padre
+defineProps({
+  updates: Object
+})
 </script>
 
 <style scoped>

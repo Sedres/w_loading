@@ -103,17 +103,18 @@
 </template>
 
 <script setup>
-import { useGlobalStore } from '@/stores/global'
-const globalStore = useGlobalStore()
-// Computed que obtiene la playlist
-const playList = computed(() => globalStore.music?.PlayList || [])
+const props = defineProps({
+  music: Object,
+  config: Object
+})
+const playList = computed(() => props.music?.PlayList || [])
 
 const currentSongIndex = ref(0)
 
 const isPlaying = ref(true)
 const progress = ref(0)
 const expanded = ref(false)
-const volume = ref(globalStore.music?.BaseVolume ?? 50)
+const volume = ref(props.music?.BaseVolume ?? 50)
 const audioPlayer = ref(null)
 
 // Función para obtener un índice aleatori
@@ -122,9 +123,9 @@ const currentSong = computed(
 )
 
 const musicWaveColor = computed(
-  () => globalStore.music?.MusicWaveColor || 'rgba(255, 255, 255, 0.664)'
+  () => props.music?.MusicWaveColor || 'rgba(255, 255, 255, 0.664)'
 )
-const mainColor = computed(() => globalStore.config?.MainColor || '#FFFFFF')
+const mainColor = computed(() => props.config?.MainColor || '#FFFFFF')
 // Observador para actualizar el audio cuando cambia la canción
 watch(currentSong, (newSong) => {
   if (audioPlayer.value && newSong) {
@@ -195,21 +196,10 @@ const updateVolume = () => {
     audioPlayer.value.volume = volume.value / 100
   }
 }
-
-// Eventos al montar y desmontar
 onMounted(async () => {
-  // Si no está cargado, lo cargamos:
-  if (!globalStore.music) {
-    await globalStore.loadJson('Music.json', 'music')
-  }
-  if (!globalStore.config) {
-    await globalStore.loadJson('Config.json', 'config')
-  }
+  volume.value = props.music?.BaseVolume ?? 50
 
-  // En este punto ya debería existir `globalStore.music?.BaseVolume`
-  volume.value = globalStore.music?.BaseVolume ?? 50
-
-  currentSongIndex.value = globalStore.music
+  currentSongIndex.value = props.music
     ? Math.floor(Math.random() * playList.value.length)
     : 0
 
@@ -225,7 +215,7 @@ onUnmounted(() => {
     audioPlayer.value.removeEventListener('timeupdate', updateProgress)
     audioPlayer.value.removeEventListener('ended', next)
   }
-  currentSongIndex.value = globalStore.music
+  currentSongIndex.value = props.music
     ? Math.floor(Math.random() * playList.value.length)
     : 0
 })

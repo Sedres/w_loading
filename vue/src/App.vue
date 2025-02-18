@@ -1,17 +1,23 @@
 <script setup>
-import { useGlobalStore } from '@/stores/global'
-const globalStore = useGlobalStore()
-onMounted(async () => {
-  await globalStore.loadAllConfigs()
-})
+import { useJsonLoader } from '@/utils/useJsonLoader'
+
+// Cargar JSONs desde la carpeta `/config/`
+const { data: news } = useJsonLoader('News.json')
+const { data: socials } = useJsonLoader('Socials.json')
+const { data: team } = useJsonLoader('Team.json')
+const { data: updates } = useJsonLoader('Updates.json')
+const { data: config } = useJsonLoader('Config.json')
+const { data: language } = useJsonLoader('Language.json')
+const { data: music } = useJsonLoader('Music.json')
 </script>
+
 <template>
-  <Background />
-  <InfoCard />
+  <Background :config="config" />
+  <InfoCard :news="news" :team="team" :updates="updates" :config="config" />
   <v-container class="bottom-container">
-    <MusicPlayer />
-    <Socials />
-    <LoadingCard />
+    <MusicPlayer :music="music" :config="config" />
+    <Socials :socials="socials" :config="config" />
+    <LoadingCard :config="config" :language="language" />
   </v-container>
 </template>
 
@@ -26,6 +32,7 @@ onMounted(async () => {
 }
 html {
   scrollbar-width: none;
+  user-select: none;
 }
 
 ::-webkit-scrollbar {
