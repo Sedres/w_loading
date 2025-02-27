@@ -24,7 +24,8 @@
 
       <v-card theme="dark" class="pa-2 updates-card" rounded>
         <v-card-title>{{ update.title }}</v-card-title>
-        <v-card-text>{{ update.text }}</v-card-text>
+        <!-- Use v-html to render the text with newlines -->
+        <v-card-text v-html="update.text.replace(/\n/g, '<br>')"></v-card-text>
       </v-card>
     </v-timeline-item>
   </v-timeline>
