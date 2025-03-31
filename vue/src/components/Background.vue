@@ -3,7 +3,7 @@
     <!-- Imagen de fondo -->
     <v-img
       v-if="isImage"
-      :src="config.Background.Path"
+      :src="`nui://w_loading/${config.Background.Path}`"
       aspect-ratio="16/9"
       cover
       class="background-image"
@@ -103,7 +103,7 @@ const reloadVideo = () => {
 }
 
 const handleVideoError = (event) => {
-  console.error('Error al cargar el video:', event)
+  console.error('Error al cargar el video:', JSON.stringify(event))
   console.warn('Intentando recargar el video...')
   reloadVideo()
 }
