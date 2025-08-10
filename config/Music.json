@@ -23,6 +23,12 @@
       "artist": "Infraction",
       "portrait": "https://i.ytimg.com/vi/SrY7LBvrY4g/maxresdefault.jpg",
       "url": "config/Music/GoodVibe.mp3"
+    },
+    {
+      "title": "Want Your Body",
+      "artist": "Taylor Torrence, Kyra Mastro",
+      "portrait": "https://i.ytimg.com/vi/fB8rdUXfwRE/maxresdefault.jpg",
+      "url": "config/Music/WantYourBody.mp3"
     }
   ]
 }

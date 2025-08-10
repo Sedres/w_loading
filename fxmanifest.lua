@@ -4,8 +4,12 @@ game 'gta5'
 name "w_loading"
 description "Modern Fivem Loading Screen"
 author "sedres"
-version "3.2"
+version "3.2.5"
 
+
+client_scripts {
+	'client/**',
+}
 
 -- ui_page 'ui/index.html'
 files {
@@ -16,6 +20,9 @@ files {
 	'config/*.json',
 }
 
-loadscreen 'ui/index.html'
+--[[ loadscreen 'ui/index.html'
 loadscreen_cursor 'yes'
 loadscreen_manual_shutdown 'yes' -- Comment to disable manual shutdown
+ ]]
+
+ui_page 'ui/index.html'

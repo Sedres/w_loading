@@ -6,10 +6,10 @@
   "LoadingAvatar": "https://i.ibb.co/vDz23X5/logo.jpg",
 
   "Background": {
-    "IsImage": true,
-    "IsVideo": false,
+    "IsImage": false,
+    "IsVideo": true,
     "IsYouTube": false,
-    "Path": "config/Background/background.jpg",
+    "Path": "config/Background/background2.mp4",
     "VideoId": "FND0z4NF8Pg&t=8s"
   }
 }
